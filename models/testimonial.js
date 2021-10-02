@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Testimonials.belongsToMany(User, { through: "user_testimonials" });
+      Testimonials.belongsTo(User, { as: "user", foreignKey: "userId" });
     }
   }
   Testimonials.init(
