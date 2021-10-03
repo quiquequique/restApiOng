@@ -1,21 +1,15 @@
 'use strict'
 
-const User = require("../models/user"); //traemos modelo! por que no podemos usar findall ?? 
+const User = require("../models/user"); //traemos modelo! por que no podemos usar findAll ?? 
 var controller = {
-    all: (req, res) => {
-        res.json('Llegamos aqui!')
-        
-        /*
-                        User.findAll({
+    all: (res) => {
+        User.findAll({
             attributes: ["firstName","roleId"],
             }).then((resul) => {
             res.json(resul);
             res.status(200);
             })
             .catch((err) => {res.json(err);})
-        */ 
-
-        
 
     },
     create : (req, res) => {
