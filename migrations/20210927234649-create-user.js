@@ -27,6 +27,11 @@ module.exports = {
 			roleId: {
 				type: Sequelize.STRING,
 			},
+			deleteAt: {
+				type: Sequelize.DATE,
+				allowNull: true,
+				defaultValue: null,
+			},
 			createdAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
