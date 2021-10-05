@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, INTEGER } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Testimonials extends Model {
     /**
@@ -15,10 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   Testimonials.init(
     {
         id: { 
-            type:type.INTEGER,
+            //type:type.INTEGER,
+            type:INTEGER,
             primaryKey: true,
             autoIncrement: true
-          },
+        },
         name: { type: DataTypes.STRING, allowNull: false },
         image: { type: DataTypes.STRING, allowNull: true },
         content: { type: DataTypes.STRING, allowNull: true },
