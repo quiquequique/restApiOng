@@ -2,7 +2,7 @@
 
 const User = require("../models/user"); //traemos modelo! por que no podemos usar findAll ?? 
 var controller = {
-    all: (res) => {
+    all: (req, res) => {
         User.findAll({
             attributes: ["firstName","roleId"],
             }).then((resul) => {
