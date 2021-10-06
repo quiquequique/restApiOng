@@ -1,5 +1,6 @@
 const AWS = require("aws-sdk");
 
+// .env
 const ID = process.env.AWS_ID;
 const SECRET = process.env.AWS_SECRET;
 const BUCKET_NAME = process.env.AWS_BUCKET_NAME;

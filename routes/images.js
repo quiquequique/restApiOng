@@ -5,6 +5,10 @@ const { uploadImagen } = require("../controllers/images");
 
 const upload = multer();
 
-router.post("/upload", upload.single("file"), uploadImagen);
+router.post(
+  "/upload",
+  /*verify if user admin (middleware) */ upload.single("file"),
+  uploadImagen
+);
 
 module.exports = router;
