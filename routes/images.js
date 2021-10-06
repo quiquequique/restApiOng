@@ -7,7 +7,7 @@ const upload = multer();
 
 router.post(
   "/upload",
-  /*verify if user admin (middleware) */ upload.single("file"),
+  /* verify if admin (middleware) */ upload.single("file"),
   uploadImagen
 );
 
