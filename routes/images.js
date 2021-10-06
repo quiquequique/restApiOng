@@ -1,14 +1,10 @@
 const express = require("express");
-const route = express.Router();
+const router = express.Router();
 const multer = require("multer");
-const { uploadImage } = require("../services/awsImageService");
+const { uploadImagen } = require("../controllers/images");
 
 const upload = multer();
 
-route.post("/upload", upload.single("file"), async (req, res) => {
-  const { originalname, buffer } = req.file;
-  const urlImagen = await uploadImage(originalname, buffer);
-  res.json(urlImagen.Location);
-});
+router.post("/upload", upload.single("file"), uploadImagen);
 
-module.exports = route;
+module.exports = router;
