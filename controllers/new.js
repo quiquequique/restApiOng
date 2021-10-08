@@ -1,4 +1,5 @@
 const { updateNew, checkExistNew } = require("../services/new");
+const errors = require("../helpers/resErrors");
 
 const getAllNews = (req, res) => {
   res.send("List of News");
@@ -22,7 +23,7 @@ const updateNews = async (req, res) => {
     const newUpdate = await updateNew(data, id);
     res.send(newUpdate);
   } else {
-    res.status(404).json({ msg: "News not found" });
+    res.status(404).json(errors._400);
   }
 };
 
