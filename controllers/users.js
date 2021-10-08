@@ -1,3 +1,14 @@
+const { register } = require("../Services/users");
+
+//Register new user
+const addUser = async (req, res) => {
+	const data = req.body;
+
+	const newUser = await register(data);
+
+	res.json({ msg: "Register new user", newUser });
+};
+
 const getUsers = (req, res) => {
 	res.send("Get all users");
 };
@@ -5,12 +16,6 @@ const getUsers = (req, res) => {
 const getUserByID = (req, res) => {
 	const { id } = req.params;
 	res.send(`Get user by ID = ${id}`);
-};
-
-const addUser = (req, res) => {
-	const data = req.body;
-
-	res.json({ msg: "Add new user", data });
 };
 
 const editUser = (req, res) => {
