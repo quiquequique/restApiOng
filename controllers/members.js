@@ -1,5 +1,5 @@
 //get all members
-const getAllMembers = (req, res) => {
+const getAllMembers = (_, res) => {
   try {
     res.send('list of all members');
   } catch (err) {

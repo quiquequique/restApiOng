@@ -3,7 +3,7 @@ const errors = require( '../helpers/resErrors')
 
 
 //get all categories
-const getAllCategories = (req, res) => {
+const getAllCategories = (_, res) => {
   try {
     res.send('list of all categories');
   } catch (err) {
