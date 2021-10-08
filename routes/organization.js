@@ -3,6 +3,6 @@ var router = express.Router();
 const organizationController = require('../controllers/organizationController');
 
 /* GET users listing. */
-router.get('/', organizationController.getAll);
+router.get('/public', organizationController.getAll);
 
 module.exports = router;
