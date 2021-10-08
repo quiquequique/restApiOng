@@ -11,7 +11,7 @@ const usersRouter = require("./routes/users");
 const categoriesRouter = require("./routes/categories");
 const activitiesRouter = require("./routes/activities");
 const organizationRouter = require("./routes/organization");
-const membersRouter = require("./routes/activities");
+const membersRouter = require("./routes/members");
 const imagesRouter = require("./routes/images");
 
 const app = express();

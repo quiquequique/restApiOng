@@ -11,7 +11,7 @@ const {
 
 router.get('/members', getAllMembers);
 router.get('/members/:id', getMemberById);
-router.post('/members/', createMember);
+router.post('/members', createMember);
 router.put('/members/:id', updateMember);
 router.delete('/members/:id', deleteMember);
 

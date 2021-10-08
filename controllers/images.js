@@ -1,4 +1,4 @@
-const { uploadImageService } = require("../services/awsImageService");
+const { uploadImageService } = require('../services/awsImageService');
 
 //upload image
 const uploadImagen = async (req, res) => {
