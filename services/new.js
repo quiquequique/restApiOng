@@ -1,10 +1,14 @@
 const { New } = require("../models");
 const updateNew = async (body, id) => {
-  return await New.update(body, {
-    where: {
-      id,
-    },
-  });
+  const exist = await checkExistNew(id);
+  if (exist) {
+    return await New.update(body, {
+      where: {
+        id,
+      },
+    });
+  }
+  return false;
 };
 const checkExistNew = async (id) => {
   const exist = await New.findByPk(id);
