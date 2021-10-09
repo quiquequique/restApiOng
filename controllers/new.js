@@ -1,4 +1,4 @@
-const { updateNew, checkExistNew } = require("../services/new");
+const { updateNew } = require("../services/new");
 const errors = require("../helpers/resErrors");
 
 const getAllNews = (req, res) => {
@@ -16,14 +16,16 @@ const CreateNews = (req, res) => {
 };
 
 const updateNews = async (req, res) => {
-  const { id } = req.params;
-  const data = req.body;
-  const exist = checkExistNew(id);
-  if (exist) {
+  try {
+    const { id } = req.params;
+    const data = req.body;
     const newUpdate = await updateNew(data, id);
-    res.send(newUpdate);
-  } else {
-    res.status(404).json(errors._400);
+    if (!newUpdate) {
+      return res.status(404).json(errors._400);
+    }
+    res.status(200).json(newUpdate);
+  } catch (e) {
+    res.status(500).json(e.message);
   }
 };
 

@@ -11,6 +11,8 @@ const usersRouter = require("./routes/users");
 const categoriesRouter = require("./routes/categories");
 const activitiesRouter = require("./routes/activities");
 const organizationRouter = require("./routes/organization");
+const membersRouter = require("./routes/activities");
+const newRouter = require("./routes/new");
 const membersRouter = require("./routes/members");
 const imagesRouter = require("./routes/images");
 
@@ -32,22 +34,23 @@ app.use("/", usersRouter);
 app.use("/organization", organizationRouter);
 app.use("/", membersRouter);
 app.use("/", categoriesRouter);
+app.use("/news", newRouter);
 app.use("/", imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-	next(createError(404));
+  next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get("env") === "development" ? err : {};
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-	// render the error page
-	res.status(err.status || 500);
-	res.render("error");
+  // render the error page
+  res.status(err.status || 500);
+  res.render("error");
 });
 
 module.exports = app;
