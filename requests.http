@@ -1,0 +1,5 @@
+### GET USERS 
+GET  http://localhost:3000/users/
+
+### GET ROLES
+GET  http://localhost:3000/roles/

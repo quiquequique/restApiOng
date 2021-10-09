@@ -1,5 +1,9 @@
+const { categoryExist, categoryDelete } = require( '../Services/dbCategories' );
+const errors = require( '../helpers/resErrors')
+
+
 //get all categories
-const getAllCategories = (req, res) => {
+const getAllCategories = (_, res) => {
   try {
     res.send('list of all categories');
   } catch (err) {
@@ -41,14 +45,39 @@ const updateCategory = (req, res) => {
 };
 
 //delete category
-const deleteCategory = (req, res) => {
-  const { id } = req.params;
+const deleteCategory = async ( req, res ) => {
+
+  const idToDelete = req.params.id;
 
   try {
-    res.send('category deleted: ' + id);
+
+    const exist = await categoryExist( idToDelete );
+
+    if( exist ){
+
+        const deletedCategory = await categoryDelete( idToDelete );
+
+        if( deletedCategory === 1 ){
+
+          res.status( 200 ).json( {meta:{ deleted: true }} );
+
+        }else{
+
+          res.status(400).json( errors._400 );
+
+        };
+
+    }else{ res.status(404).json( errors._404 ) };
+
+
   } catch (err) {
-    res.status(500).json({ err });
-  }
+
+    console.log( err );
+
+    res.status(500).json( errors._500 );
+
+  };
+
 };
 
 module.exports = {

@@ -6,12 +6,15 @@ const {
 	editUser,
 	deleteUser,
 } = require("../controllers/users");
+const { registerValidator } = require("../middlewares/userValidator");
 
 const router = Router();
 
+//Login and Register routes
+router.post("/auth/register", [registerValidator], addUser);
+
 router.get("/users", getUsers);
 router.get("/users/:id", getUserByID);
-router.post("/users", addUser);
 router.put("/users/:id", editUser);
 router.delete("/users/:id", deleteUser);
 

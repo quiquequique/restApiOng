@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+  
+  //para llenar la BD 
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Roles', [
       {

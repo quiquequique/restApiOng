@@ -1,0 +1,1 @@
+SELECT * FROM `ong`.`slides` LIMIT 1000;

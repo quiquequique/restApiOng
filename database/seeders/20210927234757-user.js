@@ -14,6 +14,18 @@ module.exports = {
 
 				createdAt: new Date(),
 				updatedAt: new Date(),
+			},			
+			{
+				firstName: "Sina",
+				lastName: "Doa",
+				email: "example2@example2.com",
+				password: "1234567",
+				photo:
+					"https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
+				roleId: 2,
+
+				createdAt: new Date(),
+				updatedAt: new Date(),
 			},
 		]);
 	},
