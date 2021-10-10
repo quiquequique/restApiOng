@@ -30,7 +30,6 @@ const deleteUser = (req, res) => {
 
 	res.json({ msg: `Delete user with ID = ${id}` });
 };
-
 module.exports = {
 	getUsers,
 	getUserByID,
