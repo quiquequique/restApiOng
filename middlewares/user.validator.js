@@ -1,31 +1,39 @@
 const { body, validationResult } = require("express-validator");
-const { isRegister } = require("../Services/users");
+const {
+	NOT_EMPTY,
+	MIN_LENGTH_3,
+	INVALID_EMAIL,
+	EXIST_EMAIL,
+	PASSWORD_LENGTH,
+} = require("../helpers/messages");
+
+const { isRegister } = require("../services/users.services");
 
 exports.registerValidator = [
 	body("firstName")
 		.trim()
 		.escape()
 		.notEmpty()
-		.withMessage("El nombre no puede estar vacio")
+		.withMessage(NOT_EMPTY)
 		.bail()
 		.isLength({ min: 2 })
-		.withMessage("El nombre debe tener por lo menos 3 caracteres"),
+		.withMessage(MIN_LENGTH_3),
 	body("lastName")
 		.trim()
 		.escape()
 		.notEmpty()
-		.withMessage("El apellido no puede estar vacio")
+		.withMessage(NOT_EMPTY)
 		.bail()
 		.isLength({ min: 2 })
-		.withMessage("El apellido debe tener por lo menos 3 caracteres"),
+		.withMessage(MIN_LENGTH_3),
 	body("email")
 		.trim()
 		.notEmpty()
 		.normalizeEmail()
-		.withMessage("El email ingresado es invalido")
+		.withMessage(INVALID_EMAIL)
 		.custom(async (value) => {
 			if (await isRegister(value)) {
-				return Promise.reject("El email ingresado ya existe");
+				return Promise.reject(EXIST_EMAIL);
 			}
 		})
 		.bail(),
@@ -33,12 +41,10 @@ exports.registerValidator = [
 		.trim()
 		.escape()
 		.notEmpty()
-		.withMessage("La contraseña no puede estar vacia")
+		.withMessage(NOT_EMPTY)
 		.bail()
 		.isLength({ min: 6, max: 16 })
-		.withMessage(
-			"La contraseña debe tener 6 caracteres como minimo y 16 como maximo"
-		),
+		.withMessage(PASSWORD_LENGTH),
 	async (req, res, next) => {
 		const errors = validationResult(req);
 
