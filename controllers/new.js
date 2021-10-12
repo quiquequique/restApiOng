@@ -1,4 +1,4 @@
-const { updateNew } = require("../services/new");
+const { updateNew, CreateNews } = require("../services/new");
 const errors = require("../helpers/resErrors");
 
 const getAllNews = (req, res) => {
@@ -11,8 +11,16 @@ const getNewsById = (req, res) => {
 };
 
 const CreateNews = (req, res) => {
-  const data = req.body;
-  res.json({ msg: "News created", data });
+  try {
+    const data = req.body;
+    const newcreated = await CreateNews(data);
+    if (!newcreated) {
+      return res.status(201).json(newcreated);
+    }
+    res.status(201).json(newcreated);
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
 };
 
 const updateNews = async (req, res) => {

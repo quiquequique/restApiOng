@@ -1,4 +1,15 @@
 const { New } = require("../models");
+
+const CreateNews = async (body) => {
+  const name = typeof body.name !== "undefined";
+  const content = typeof body.content !== "undefined";
+  const image = typeof body.image !== "undefined";
+  if (name && content && image) {
+    const resp = await New.create(body);
+    return resp;
+  }
+  return false;
+};
 const updateNew = async (body, id) => {
   const exist = await checkExistNew(id);
   if (exist) {
@@ -21,4 +32,5 @@ const checkExistNew = async (id) => {
 module.exports = {
   updateNew,
   checkExistNew,
+  CreateNews,
 };
