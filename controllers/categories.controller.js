@@ -18,13 +18,17 @@ const getAllCategories = async (_, res) => {
   }
 };
 
-//get a single category
+//get a single category by id
 const getCategoryById = async (req, res) => {
   const { id } = req.params;
-
   try {
     const category = await getCategory(id);
-    res.json(category);
+
+    if (!category) {
+      res.status(400).json(errors._400);
+    } else {
+      res.json(category);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json(errors._500);

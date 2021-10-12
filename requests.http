@@ -5,7 +5,13 @@ GET  http://localhost:3000/users/
 GET  http://localhost:3000/roles/
 
 ### GET CATEGORIES
-GET  http://localhost:3000/categories/
+GET  http://localhost:3000/categories
 
 ### GET CATEGORY by ID
-GET  http://localhost:3000/categories/1
+GET  http://localhost:3000/categories/15
+
+
+
+### DELETE CATEGORY by ID
+
+DELETE  http://localhost:3000/categories/2
