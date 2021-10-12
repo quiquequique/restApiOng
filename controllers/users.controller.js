@@ -8,7 +8,7 @@ const addUser = async (req, res) => {
 
 	const newUser = await register(data);
 
-	return res.json({ msg: REGISTER_SUCCESS, newUser });
+	res.json({ msg: REGISTER_SUCCESS, newUser });
 };
 
 const getUsers = (req, res) => {
