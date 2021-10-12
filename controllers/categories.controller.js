@@ -1,6 +1,7 @@
 const {
   categoryExist,
   getAllCategory,
+  getCategory,
   categoryDelete
 } = require('../Services/dbCategories');
 const errors = require('../helpers/resErrors');
@@ -18,13 +19,15 @@ const getAllCategories = async (_, res) => {
 };
 
 //get a single category
-const getCategoryById = (req, res) => {
+const getCategoryById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    res.send('category by id:' + id);
-  } catch (err) {
-    res.status(500).json({ err });
+    const category = await getCategory(id);
+    res.json(category);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -34,8 +37,9 @@ const createCategory = (req, res) => {
 
   try {
     res.send('new category created: ' + newCategory);
-  } catch (err) {
-    res.status(500).json({ err });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -45,8 +49,9 @@ const updateCategory = (req, res) => {
 
   try {
     res.send('category updated: ' + id);
-  } catch (err) {
-    res.status(500).json({ err });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(errors._500);
   }
 };
 
