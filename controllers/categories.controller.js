@@ -9,9 +9,11 @@ const errors = require('../helpers/resErrors');
 const getAllCategories = async (_, res) => {
   try {
     const categories = await getAllCategory();
-    console.log()
-  } catch (err) {
-    res.status(500).json({ err });
+    res.json(categories);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json(errors._500);
   }
 };
 

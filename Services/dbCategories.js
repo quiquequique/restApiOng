@@ -7,7 +7,9 @@ const categoryExist = async (id) => {
 };
 
 const getAllCategory = async () => {
-  return await Category.findAll();
+  return await Category.findAll({
+    attributes: ['name']
+  });
 };
 
 const categoryDelete = async (id) => {
