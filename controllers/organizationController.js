@@ -1,5 +1,6 @@
 
 const { getAllOrganization } = require( '../services/dbOrganization');
+const sendEmail = require( '../Services/welcomeEmail.services')
 
 const errors = require( '../helpers/resErrors')
 
@@ -13,6 +14,8 @@ const controller = {
         const organization = await getAllOrganization();
 
         if( organization.length !== 0 ){
+
+            sendEmail();
 
             return res.json( {
 
