@@ -1,4 +1,6 @@
-const { register } = require("../Services/users");
+const { register } = require("../Services/users.services");
+
+const { REGISTER_SUCCESS } = require("../helpers/messages");
 
 //Register new user
 const addUser = async (req, res) => {
@@ -6,7 +8,7 @@ const addUser = async (req, res) => {
 
 	const newUser = await register(data);
 
-	res.json({ msg: "Register new user", newUser });
+	return res.json({ msg: REGISTER_SUCCESS, newUser });
 };
 
 const getUsers = (req, res) => {
