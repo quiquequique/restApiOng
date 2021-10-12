@@ -1,11 +1,15 @@
-const { categoryExist, categoryDelete } = require( '../Services/dbCategories' );
-const errors = require( '../helpers/resErrors')
-
+const {
+  categoryExist,
+  getAllCategory,
+  categoryDelete
+} = require('../Services/dbCategories');
+const errors = require('../helpers/resErrors');
 
 //get all categories
-const getAllCategories = (_, res) => {
+const getAllCategories = async (_, res) => {
   try {
-    res.send('list of all categories');
+    const categories = await getAllCategory();
+    console.log()
   } catch (err) {
     res.status(500).json({ err });
   }
@@ -45,39 +49,28 @@ const updateCategory = (req, res) => {
 };
 
 //delete category
-const deleteCategory = async ( req, res ) => {
-
+const deleteCategory = async (req, res) => {
   const idToDelete = req.params.id;
 
   try {
+    const exist = await categoryExist(idToDelete);
 
-    const exist = await categoryExist( idToDelete );
+    if (exist) {
+      const deletedCategory = await categoryDelete(idToDelete);
 
-    if( exist ){
-
-        const deletedCategory = await categoryDelete( idToDelete );
-
-        if( deletedCategory === 1 ){
-
-          res.status( 200 ).json( {meta:{ deleted: true }} );
-
-        }else{
-
-          res.status(400).json( errors._400 );
-
-        };
-
-    }else{ res.status(404).json( errors._404 ) };
-
-
+      if (deletedCategory === 1) {
+        res.status(200).json({ meta: { deleted: true } });
+      } else {
+        res.status(400).json(errors._400);
+      }
+    } else {
+      res.status(404).json(errors._404);
+    }
   } catch (err) {
+    console.log(err);
 
-    console.log( err );
-
-    res.status(500).json( errors._500 );
-
-  };
-
+    res.status(500).json(errors._500);
+  }
 };
 
 module.exports = {
