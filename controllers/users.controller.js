@@ -1,42 +1,37 @@
-const { register } = require("../Services/users.services");
+const { register, login } = require("../services/users.services");
 
-const { REGISTER_SUCCESS } = require("../helpers/messages");
+const { REGISTER_SUCCESS, INVALID_CREDENTIAL } = require("../helpers/messages");
 
 //Register new user
 const addUser = async (req, res) => {
 	const data = req.body;
 
-	const newUser = await register(data);
+	try {
+		const newUser = await register(data);
 
-	res.json({ msg: REGISTER_SUCCESS, newUser });
+		return res.status(201).json({ msg: REGISTER_SUCCESS, newUser });
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
 };
 
-const getUsers = (req, res) => {
-	res.send("Get all users");
-};
-
-const getUserByID = (req, res) => {
-	const { id } = req.params;
-	res.send(`Get user by ID = ${id}`);
-};
-
-const editUser = (req, res) => {
-	const { id } = req.params;
+const loginUser = async (req, res) => {
 	const data = req.body;
 
-	res.json({ msg: `Edit user with ID = ${id}`, data });
-};
+	try {
+		const user = await login(data);
 
-const deleteUser = (req, res) => {
-	const { id } = req.params;
+		if (user === null) {
+			return res.status(401).json({ ok: false, msg: INVALID_CREDENTIAL });
+		}
 
-	res.json({ msg: `Delete user with ID = ${id}` });
+		return res.status(202).json({ user });
+	} catch (error) {
+		return res.status(500).json({ error: error.message });
+	}
 };
 
 module.exports = {
-	getUsers,
-	getUserByID,
 	addUser,
-	editUser,
-	deleteUser,
+	loginUser,
 };
