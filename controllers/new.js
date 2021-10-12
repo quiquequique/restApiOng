@@ -1,5 +1,5 @@
 const { updateNew } = require("../services/new");
-const errors = require("../helpers/resErrors");
+const errors = require("../helpers/resError.helper");
 
 const getAllNews = (req, res) => {
   res.send("List of News");

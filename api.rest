@@ -3,7 +3,7 @@
 GET http://localhost:3000/organization/public
 
 ###
-DELETE http://localhost:3000/categories/1
+DELETE http://localhost:3000/categories/5
 
 ###
 POST http://localhost:3000/auth/register
