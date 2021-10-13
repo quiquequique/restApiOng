@@ -2,7 +2,7 @@ const { updateNew, newsdetail } = require("../services/new");
 const errors = require("../helpers/resError.helper");
 
 const getAllNews = (req, res) => {
-  res.send("List of News");
+  res.send('List of News');
 };
 
 const getNewsById = async (req, res) => {
@@ -20,7 +20,7 @@ const getNewsById = async (req, res) => {
 
 const CreateNews = (req, res) => {
   const data = req.body;
-  res.json({ msg: "News created", data });
+  res.json({ msg: 'News created', data });
 };
 
 const updateNews = async (req, res) => {
@@ -47,5 +47,5 @@ module.exports = {
   getNewsById,
   CreateNews,
   updateNews,
-  deleteNews,
+  deleteNews
 };

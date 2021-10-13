@@ -1,19 +1,19 @@
-const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const cors = require("cors");
-require("dotenv").config();
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+require('dotenv').config();
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users.routes");
-const categoriesRouter = require("./routes/categories.routes");
-const activitiesRouter = require("./routes/activities.routes");
-const organizationRouter = require("./routes/organization.routes");
-const newRouter = require("./routes/new");
-const membersRouter = require("./routes/members");
-const imagesRouter = require("./routes/images");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users.routes');
+const categoriesRouter = require('./routes/categories.routes');
+const activitiesRouter = require('./routes/activities.routes');
+const organizationRouter = require('./routes/organization.routes');
+const newRouter = require('./routes/new');
+const membersRouter = require('./routes/members');
+const imagesRouter = require('./routes/images');
 
 const app = express();
 app.use(cors());
@@ -28,14 +28,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/activities", activitiesRouter);
-app.use("/organization", organizationRouter);
-app.use("/", membersRouter);
-app.use("/categories", categoriesRouter);
-app.use("/news", newRouter);
-app.use("/", imagesRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/activities', activitiesRouter);
+app.use('/organization', organizationRouter);
+app.use('/', membersRouter);
+app.use('/categories', categoriesRouter);
+app.use('/news', newRouter);
+app.use('/', imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

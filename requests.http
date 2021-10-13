@@ -8,7 +8,7 @@ GET  http://localhost:3000/roles/
 GET  http://localhost:3000/categories
 
 ### GET CATEGORY by ID
-GET  http://localhost:3000/categories/15
+GET  http://localhost:3000/categories/3
 
 
 
