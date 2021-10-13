@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+
 const { User } = require("../models");
 
 const register = ({ firstName, lastName, email, photo, password }) => {
@@ -10,7 +11,39 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 		password: bcrypt.hashSync(password, 10),
 	};
 
-	return User.create(newUser);
+	try {
+		return User.create(newUser);
+	} catch (error) {
+		throw error;
+	}
+};
+
+const login = async ({ email, password }) => {
+	try {
+		const user = await User.findOne({
+			where: { email },
+		});
+
+		if (!user) {
+			return null;
+		}
+
+		const isCorrect = await bcrypt.compareSync(password, user.password);
+
+		if (!isCorrect) {
+			return null;
+		}
+
+		return {
+			firstname: user.firstName,
+			lastname: user.lastName,
+			email: user.email,
+			photo: user.photo,
+			roleId: user.roleId,
+		};
+	} catch (error) {
+		throw error;
+	}
 };
 
 const isRegister = async (email) => {
@@ -24,5 +57,6 @@ const isRegister = async (email) => {
 
 module.exports = {
 	register,
+	login,
 	isRegister,
 };
