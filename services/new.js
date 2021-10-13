@@ -1,4 +1,16 @@
 const { New } = require("../models");
+
+const newsdetail = async (id) => {
+  const exist = await checkExistNew(id);
+  if (exist) {
+    return await New.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+  return false;
+};
 const updateNew = async (body, id) => {
   const exist = await checkExistNew(id);
   if (exist) {
@@ -21,4 +33,5 @@ const checkExistNew = async (id) => {
 module.exports = {
   updateNew,
   checkExistNew,
+  newsdetail,
 };
