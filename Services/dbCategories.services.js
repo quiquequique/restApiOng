@@ -1,44 +1,45 @@
 const { Category } = require('../models');
-const errors = require( '../helpers/resError.helper')
+const errors = require('../helpers/resError.helper');
 
-const categoryExist = async ( id ) => {
-
-  const exist = await Category.findByPk( id );
+const categoryExist = async (id) => {
+  const exist = await Category.findByPk(id);
 
   return exist ? true : false;
-
 };
 
-const categoryDelete = async ( id ) => {
+const getAllCategory = async () => {
+  const allCategories = await Category.findAll({
+    attributes: ['name']
+  });
+  return allCategories;
+};
 
-  try{
+const getCategory = async (id) => {
+  const category = await Category.findByPk(id);
+  return category;
+};
 
-    const exist = await categoryExist( id );
+const categoryDelete = async (id) => {
+  try {
+    const exist = await categoryExist(id);
 
-    if( exist ){
-
-      const categoryDestroy = await Category.destroy( { where: { id } } );
+    if (exist) {
+      const categoryDestroy = await Category.destroy({ where: { id } });
 
       return categoryDestroy;
+    } else {
+      return (this.categoryDestroy = 0);
+    }
+  } catch (error) {
+    console.log(error);
 
-    }else{
-
-      return this.categoryDestroy = 0;
-
-    };
-
-  }catch( error ){
-
-    console.log( error );
-
-    res.status(500).json( errors._500 );
-
-  };
-
+    res.status(500).json(errors._500);
+  }
 };
-
 
 module.exports = {
   categoryExist,
+  getAllCategory,
+  getCategory,
   categoryDelete
 };
