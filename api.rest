@@ -6,16 +6,15 @@ GET http://localhost:3000/organization/public
 DELETE http://localhost:3000/categories/1
 
 ###
-POST http://localhost:3000/auth/register
+POST http://localhost:3000/users/auth/register
+Content-Type: application/json
 
 {
-    "firstName":"este",
-	"lastName":"nombre",
-	"email":"eamil@gmail.com",
-	"photo":"http//photo.com",
-	"password":12345
+    "firstName":"Pablo",
+	"lastName":"Lnombre",
+	"email":"eabramzon@hotmail.com",
+	"password":"123456"
 }
-
 
 ### GET USERS 
 GET  http://localhost:3000/users/
