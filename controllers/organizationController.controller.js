@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 
-const { getAllOrganization } = require('../services/dbOrganization.js');
+const { getAllOrganization } = require('../services/dbOrganization');
 
 const errors = require('../helpers/resError.helper');
 
@@ -32,7 +33,7 @@ const controller = {
 
       res.status(404).json(errors._404);
     } catch (error) {
-      console.log(error);
+      console.log({ message: error });
 
       res.status(500).json(errors._500);
     }

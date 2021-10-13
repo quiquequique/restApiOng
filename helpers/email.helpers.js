@@ -1,13 +1,26 @@
+let userData = {
+  firstName: '*',
+  lastName: '*',
+  set firstNames(value) {
+    this.firstName = value;
+  },
+  set lastNames(value) {
+    this.lastName = value;
+  },
+  get nombreCompleto() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
 
-const emailSubject = "Subject email ong1";
+const emailSubject = 'Subject email ong1';
 
-const emailLogo = "https://seeklogo.com/images/1/2-minutos-logo-AD6BFBF62E-seeklogo.com.png";
+const emailLogo = 'https://seeklogo.com/images/1/2-minutos-logo-AD6BFBF62E-seeklogo.com.png';
 
-const emailTitle = "Título de ONG1 email";
+const emailTitle = `Título de ONG1 email: hola ${userData.nombreCompleto} `;
 
-const emailText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan orci nunc. Sed vel blandit quam. Nunc fermentum ante non pellentesque tincidunt. Phasellus eu diam ac magna tincidunt malesuada. Aliquam iaculis leo at sapien bibendum laoreet. Nam sit amet felis vel nunc vehicula congue vitae eget quam. Curabitur eget orci sit amet quam pulvinar lacinia. Donec eget varius ligula. Ut ornare neque enim, accumsan molestie justo dictum eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales dui et lorem auctor volutpat. Quisque accumsan nisi ac tellus tempus aliquet.";
+const emailText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan orci nunc. Sed vel blandit quam. Nunc fermentum ante non pellentesque tincidunt. Phasellus eu diam ac magna tincidunt malesuada. Aliquam iaculis leo at sapien bibendum laoreet. Nam sit amet felis vel nunc vehicula congue vitae eget quam. Curabitur eget orci sit amet quam pulvinar lacinia. Donec eget varius ligula. Ut ornare neque enim, accumsan molestie justo dictum eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales dui et lorem auctor volutpat. Quisque accumsan nisi ac tellus tempus aliquet.';
 
-const ongContact = "Datos de contacto de ONG1-- www.ong1.com"
+const ongContact = 'Datos de contacto de ONG1-- www.ong1.com';
 
 const emailHtml = `
 <!doctype html>
@@ -310,9 +323,9 @@ const emailHtml = `
                       <div
                         style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">
                         <p style="text-align: center;"><span
-                            style="font-size: 24px;"><strong>${ emailTitle }</strong></span></p>
+                            style="font-size: 24px;"><strong>${emailTitle}</strong></span></p>
                         <p style="text-align: center;">&nbsp;</p>
-                        <p style="text-align: center;"><span style="font-size: 16px;">${ emailText }</span></p>
+                        <p style="text-align: center;"><span style="font-size: 16px;">${emailText}</span></p>
                       </div>
 
                     </td>
@@ -337,7 +350,7 @@ const emailHtml = `
 
                       <div
                         style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#000000;">
-                        <p style="text-align: center;">${ ongContact }</p>
+                        <p style="text-align: center;">${ongContact}</p>
                       </div>
 
                     </td>
@@ -418,4 +431,4 @@ const emailHtml = `
 
 </html>`;
 
-module.exports = { emailHtml, emailSubject };
+module.exports = { emailHtml, emailSubject, userData };

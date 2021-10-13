@@ -5,7 +5,7 @@ const {
 } = require('../Services/dbCategories.services');
 const errors = require('../helpers/resError.helper');
 
-//get all categories
+// get all categories
 const getAllCategories = async (_, res) => {
   try {
     const categories = await getAllCategory();
@@ -16,7 +16,7 @@ const getAllCategories = async (_, res) => {
   }
 };
 
-//get a single category
+// get a single category
 const getCategoryById = async (req, res) => {
   const { id } = req.params;
 
@@ -28,7 +28,7 @@ const getCategoryById = async (req, res) => {
     res.status(500).json(errors._500);
   }
 };
-//create category
+// create category
 const createCategory = (req, res) => {
   const { newCategory } = req.body;
 
@@ -40,7 +40,7 @@ const createCategory = (req, res) => {
   }
 };
 
-//update category
+// update category
 const updateCategory = (req, res) => {
   const { id } = req.params;
 
@@ -52,7 +52,7 @@ const updateCategory = (req, res) => {
   }
 };
 
-//delete category
+// delete category
 const deleteCategory = async (req, res) => {
   const idToDelete = req.params.id;
 
