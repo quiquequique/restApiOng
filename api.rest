@@ -3,5 +3,22 @@
 GET http://localhost:3000/organization/public
 
 ###
-DELETE http://localhost:3000/categories/1
+DELETE http://localhost:3000/categories/5
 
+###
+POST http://localhost:3000/auth/register
+
+{
+    "firstName":"este",
+	"lastName":"nombre",
+	"email":"eamil@gmail.com",
+	"photo":"http//photo.com",
+	"password":12345
+}
+
+
+### GET USERS 
+GET  http://localhost:3000/users/
+
+### GET ROLES
+GET  http://localhost:3000/roles/

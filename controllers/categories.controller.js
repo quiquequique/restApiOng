@@ -1,37 +1,24 @@
-const {
-  categoryExist,
-  getAllCategory,
-  getCategory,
-  categoryDelete
-} = require('../Services/dbCategories');
-const errors = require('../helpers/resErrors');
+const { categoryDelete } = require( '../Services/dbCategories.services' );
+const errors = require( '../helpers/resError.helper')
+
 
 //get all categories
-const getAllCategories = async (_, res) => {
+const getAllCategories = (_, res) => {
   try {
-    const categories = await getAllCategory();
-    res.json(categories);
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json(errors._500);
+    res.send('list of all categories');
+  } catch (err) {
+    res.status(500).json({ err });
   }
 };
 
-//get a single category by id
-const getCategoryById = async (req, res) => {
+//get a single category
+const getCategoryById = (req, res) => {
   const { id } = req.params;
-  try {
-    const category = await getCategory(id);
 
-    if (!category) {
-      res.status(400).json(errors._400);
-    } else {
-      res.json(category);
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(errors._500);
+  try {
+    res.send('category by id:' + id);
+  } catch (err) {
+    res.status(500).json({ err });
   }
 };
 
@@ -41,9 +28,8 @@ const createCategory = (req, res) => {
 
   try {
     res.send('new category created: ' + newCategory);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(errors._500);
+  } catch (err) {
+    res.status(500).json({ err });
   }
 };
 
@@ -53,35 +39,38 @@ const updateCategory = (req, res) => {
 
   try {
     res.send('category updated: ' + id);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(errors._500);
+  } catch (err) {
+    res.status(500).json({ err });
   }
 };
 
 //delete category
-const deleteCategory = async (req, res) => {
+const deleteCategory = async ( req, res ) => {
+
   const idToDelete = req.params.id;
 
   try {
-    const exist = await categoryExist(idToDelete);
 
-    if (exist) {
-      const deletedCategory = await categoryDelete(idToDelete);
+        const deletedCategory = await categoryDelete( idToDelete );
 
-      if (deletedCategory === 1) {
-        res.status(200).json({ meta: { deleted: true } });
-      } else {
-        res.status(400).json(errors._400);
-      }
-    } else {
-      res.status(404).json(errors._404);
-    }
+        if( deletedCategory === 1 ){
+
+          res.status( 200 ).json( {meta:{ deleted: true }} );
+
+        }else{
+
+          res.status(404).json( errors._404 );
+
+        };
+
   } catch (err) {
-    console.log(err);
 
-    res.status(500).json(errors._500);
-  }
+    console.log( err );
+
+    res.status(500).json( errors._500 );
+
+  };
+
 };
 
 module.exports = {

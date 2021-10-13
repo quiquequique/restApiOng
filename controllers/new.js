@@ -1,4 +1,4 @@
-const { updateNew } = require("../services/new");
+const { updateNew, newsdetail } = require("../services/new");
 const errors = require("../helpers/resErrors");
 
 const getAllNews = (req, res) => {
@@ -6,8 +6,16 @@ const getAllNews = (req, res) => {
 };
 
 const getNewsById = (req, res) => {
-  const { id } = req.params;
-  res.send("News by id:" + id);
+  try {
+    const { id } = req.params;
+    const details = await newsdetail(id);
+    if (!details) {
+      return res.status(404).json(errors._400);
+    }
+    res.status(200).json(details);
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
 };
 
 const CreateNews = (req, res) => {
