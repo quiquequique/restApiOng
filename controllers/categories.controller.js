@@ -1,5 +1,5 @@
-const { categoryExist, categoryDelete } = require( '../Services/dbCategories' );
-const errors = require( '../helpers/resErrors')
+const { categoryDelete } = require( '../Services/dbCategories.services' );
+const errors = require( '../helpers/resError.helper')
 
 
 //get all categories
@@ -51,10 +51,6 @@ const deleteCategory = async ( req, res ) => {
 
   try {
 
-    const exist = await categoryExist( idToDelete );
-
-    if( exist ){
-
         const deletedCategory = await categoryDelete( idToDelete );
 
         if( deletedCategory === 1 ){
@@ -63,12 +59,9 @@ const deleteCategory = async ( req, res ) => {
 
         }else{
 
-          res.status(400).json( errors._400 );
+          res.status(404).json( errors._404 );
 
         };
-
-    }else{ res.status(404).json( errors._404 ) };
-
 
   } catch (err) {
 

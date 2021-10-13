@@ -1,7 +1,7 @@
 
 const { getAllOrganization } = require( '../services/dbOrganization');
 
-const errors = require( '../helpers/resErrors')
+const errors = require( '../helpers/resError.helper')
 
 
 const controller = {
