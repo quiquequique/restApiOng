@@ -10,6 +10,17 @@ const CreateNews = async (body) => {
   }
   return false;
 };
+const newsdetail = async (id) => {
+  const exist = await checkExistNew(id);
+  if (exist) {
+    return await New.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+  return false;
+};
 const updateNew = async (body, id) => {
   const exist = await checkExistNew(id);
   if (exist) {
@@ -33,4 +44,5 @@ module.exports = {
   updateNew,
   checkExistNew,
   CreateNews,
+  newsdetail,
 };

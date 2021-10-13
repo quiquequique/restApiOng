@@ -5,7 +5,7 @@ const {
 	addUser,
 	editUser,
 	deleteUser,
-} = require("../controllers/users");
+} = require("../controllers/users.js");
 const { registerValidator } = require("../middlewares/userValidator");
 
 const router = Router();

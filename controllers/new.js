@@ -1,13 +1,21 @@
-const { updateNew, createNews } = require("../services/new");
-const errors = require("../helpers/resErrors");
+const { updateNew, newsdetail, createNews } = require("../services/new");
+const errors = require("../helpers/resError.helper");
 
 const getAllNews = (req, res) => {
   res.send("List of News");
 };
 
-const getNewsById = (req, res) => {
-  const { id } = req.params;
-  res.send("News by id:" + id);
+const getNewsById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const details = await newsdetail(id);
+    if (!details) {
+      return res.status(404).json(errors._400);
+    }
+    res.status(200).json(details);
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
 };
 
 const CreateNews = async (req, res) => {
