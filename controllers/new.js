@@ -1,4 +1,4 @@
-const { updateNew, CreateNews } = require("../services/new");
+const { updateNew, createNews } = require("../services/new");
 const errors = require("../helpers/resErrors");
 
 const getAllNews = (req, res) => {
@@ -10,12 +10,12 @@ const getNewsById = (req, res) => {
   res.send("News by id:" + id);
 };
 
-const CreateNews = (req, res) => {
+const CreateNews = async (req, res) => {
   try {
     const data = req.body;
-    const newcreated = await CreateNews(data);
+    const newcreated = await createNews(data);
     if (!newcreated) {
-      return res.status(201).json(newcreated);
+      return res.status(400).json(errors._400);
     }
     res.status(201).json(newcreated);
   } catch (e) {
@@ -29,7 +29,7 @@ const updateNews = async (req, res) => {
     const data = req.body;
     const newUpdate = await updateNew(data, id);
     if (!newUpdate) {
-      return res.status(404).json(errors._400);
+      return res.status(404).json(errors._404);
     }
     res.status(200).json(newUpdate);
   } catch (e) {
