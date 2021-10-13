@@ -1,11 +1,11 @@
 const { updateNew, newsdetail } = require("../services/new");
-const errors = require("../helpers/resErrors");
+const errors = require("../helpers/resError.helper");
 
 const getAllNews = (req, res) => {
   res.send("List of News");
 };
 
-const getNewsById = (req, res) => {
+const getNewsById = async (req, res) => {
   try {
     const { id } = req.params;
     const details = await newsdetail(id);

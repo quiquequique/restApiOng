@@ -1,51 +1,42 @@
 
-const { getAllOrganization } = require( '../services/dbOrganization');
+const { getAllOrganization } = require('../services/dbOrganization.js');
 
-const errors = require( '../helpers/resError.helper')
+const errors = require('../helpers/resError.helper');
 
 
 const controller = {
 
-    getAll: async ( req, res ) => {
+  getAll: async (req, res) => {
+    try {
+      const organization = await getAllOrganization();
 
-        try{
+      if (organization.length !== 0) {
+        return res.json({
 
-        const organization = await getAllOrganization();
+          meta: {
 
-        if( organization.length !== 0 ){
+            status: '200',
+            link: '/organization/public',
+            count: organization.length
+          },
+          data: {
 
-            return res.json( {
+            name: organization[0].name,
+            image: organization[0].image,
+            phone: organization[0].phone,
+            address: organization[0].address
 
-                meta:{
+          }
+        });
+      }
 
-                    status: '200',
-                    link:'/organization/public',
-                    count: organization.length
-                },
-                data:{
+      res.status(404).json(errors._404);
+    } catch (error) {
+      console.log(error);
 
-                    name: organization[0].name,
-                    image: organization[0].image,
-                    phone: organization[0].phone,
-                    address: organization[0].address
-
-                }
-            } );
-
-        }else{
-
-            res.status( 404 ).json( errors._404 );
-        }
-
-
-        }catch( error ){
-
-            console.log( error );
-
-            res.status( 500 ).json( errors._500 );
-        }
-
+      res.status(500).json(errors._500);
     }
+  }
 };
 
 module.exports = controller;
