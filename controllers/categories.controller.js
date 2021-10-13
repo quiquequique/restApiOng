@@ -1,27 +1,33 @@
-const { categoryDelete } = require( '../Services/dbCategories.services' );
-const errors = require( '../helpers/resError.helper')
-
+const {
+  getAllCategory,
+  getCategory,
+  categoryDelete
+} = require('../Services/dbCategories.services');
+const errors = require('../helpers/resError.helper');
 
 //get all categories
-const getAllCategories = (_, res) => {
+const getAllCategories = async (_, res) => {
   try {
-    res.send('list of all categories');
+    const categories = await getAllCategory();
+    res.json(categories);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
 //get a single category
-const getCategoryById = (req, res) => {
+const getCategoryById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    res.send('category by id:' + id);
+    const category = await getCategory(id);
+    res.json(category);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
-
 //create category
 const createCategory = (req, res) => {
   const { newCategory } = req.body;
@@ -29,7 +35,8 @@ const createCategory = (req, res) => {
   try {
     res.send('new category created: ' + newCategory);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -40,37 +47,28 @@ const updateCategory = (req, res) => {
   try {
     res.send('category updated: ' + id);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
 //delete category
-const deleteCategory = async ( req, res ) => {
-
+const deleteCategory = async (req, res) => {
   const idToDelete = req.params.id;
 
   try {
+    const deletedCategory = await categoryDelete(idToDelete);
 
-        const deletedCategory = await categoryDelete( idToDelete );
-
-        if( deletedCategory === 1 ){
-
-          res.status( 200 ).json( {meta:{ deleted: true }} );
-
-        }else{
-
-          res.status(404).json( errors._404 );
-
-        };
-
+    if (deletedCategory === 1) {
+      res.status(200).json({ meta: { deleted: true } });
+    } else {
+      res.status(404).json(errors._404);
+    }
   } catch (err) {
+    console.log(err);
 
-    console.log( err );
-
-    res.status(500).json( errors._500 );
-
-  };
-
+    res.status(500).json(errors._500);
+  }
 };
 
 module.exports = {
