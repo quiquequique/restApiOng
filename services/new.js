@@ -1,6 +1,7 @@
 const { New } = require("../models");
 
-const CreateNews = async (body) => {
+const createNews = async (body) => {
+  body.type = "news";
   const name = typeof body.name !== "undefined";
   const content = typeof body.content !== "undefined";
   const image = typeof body.image !== "undefined";
@@ -39,10 +40,17 @@ const checkExistNew = async (id) => {
   }
   return true;
 };
-
+const deleteNews = async (id) => {
+  const exist = await checkExistNew(id);
+  if (exist) {
+    return await New.destroy(id);
+  }
+  return false;
+};
 module.exports = {
   updateNew,
   checkExistNew,
-  CreateNews,
+  createNews,
   newsdetail,
+  deleteNews,
 };
