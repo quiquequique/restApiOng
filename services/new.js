@@ -1,6 +1,7 @@
 const { New } = require("../models");
 
 const CreateNews = async (body) => {
+  body.type = "news";
   const name = typeof body.name !== "undefined";
   const content = typeof body.content !== "undefined";
   const image = typeof body.image !== "undefined";
