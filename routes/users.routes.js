@@ -1,5 +1,6 @@
 var { Router } = require("express");
 const { addUser, loginUser } = require("../controllers/users.controller");
+const { isAuthenticated } = require("../middlewares/isAuthenticated");
 const {
 	registerValidator,
 	loginValidator,
