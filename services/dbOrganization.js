@@ -1,10 +1,11 @@
 const { Organization } = require('../models/');
 
 const getAllOrganization = async () => {
-  return await Organization.findAll();
+  const organizations = await Organization.findAll();
+  return organizations;
 };
 
-/*const postOrganization = async body => {
+/* const postOrganization = async body => {
   return await organization.create(body);
 };
 
@@ -14,7 +15,7 @@ const updateOneOrganization = async (body, id) => {
       id,
     },
   });
-};*/
+}; */
 
 
 module.exports = {

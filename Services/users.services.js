@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
+const sendEmail = require('../Services/welcomeEmail.services')
 
-const { User } = require("../models");
+const { User } = require('../models');
 
 const register = ({ firstName, lastName, email, photo, password }) => {
 	const newUser = {
@@ -12,7 +13,12 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 	};
 
 	try {
-		return User.create(newUser);
+		const createdUser = User.create(newUser);
+        if(!createdUser) {
+			return null;
+		}
+		sendEmail(firstName, lastName, email);
+		return createdUser;
 	} catch (error) {
 		throw error;
 	}
