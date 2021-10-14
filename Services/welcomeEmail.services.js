@@ -2,21 +2,18 @@
 // using Twilio SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 
-const { emailHtml, emailSubject, userData } = require('../helpers/email2.helpers');
+const { EmailData } = require('../helpers/email2.helpers');
 
 const sendEmail = (firstName, lastName, email) => {
-  console.log(firstName, lastName, email);
-  userData.firstNames = firstName;
-  userData.lastNames = lastName;
-  console.log(userData.firstName + userData.lastName);
   // eslint-disable-next-line global-require
   const sgMail = require('@sendgrid/mail');
+  const emailBody = new EmailData(firstName, lastName);
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
-    to: 'eabramzon@hotmail.com', // Change to your recipient
+    to: email,
     from: process.env.SENDGRID_VERIFIED_SENDER, // Change to your verified sender
-    subject: emailSubject,
-    html: emailHtml,
+    subject: emailBody.emailSubject,
+    html: emailBody.emailHtml,
   };
   sgMail
     .send(msg)

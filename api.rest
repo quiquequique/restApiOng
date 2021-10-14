@@ -10,10 +10,10 @@ POST http://localhost:3000/users/auth/register
 Content-Type: application/json
 
 {
-    "firstName":"Pablo",
-	"lastName":"Lnombre",
-	"email":"amzonxx@hotmail.com",
-	"password":"123456"
+    "firstName":"Enrique",
+	"lastName":"Abramzon",
+	"email":"eabramzon@hotmail.com",
+	"password":"37373737"
 }
 
 ### GET USERS 
