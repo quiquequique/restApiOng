@@ -4,6 +4,7 @@ const errors = require('../helpers/resError.helper');
 const categoryExist = async (id) => {
   const exist = await Category.findByPk(id);
 
+  // eslint-disable-next-line no-unneeded-ternary
   return exist ? true : false;
 };
 
