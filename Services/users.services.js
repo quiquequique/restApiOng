@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
-const sendEmail = require('../Services/welcomeEmail.services')
+const sendEmail = require("../Services/welcomeEmail.services");
 
-const { User } = require('../models');
+const { User } = require("../models");
+const { createAccessToken } = require("./jwt.services");
 
 const register = ({ firstName, lastName, email, photo, password }) => {
 	const newUser = {
@@ -14,7 +15,7 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 
 	try {
 		const createdUser = User.create(newUser);
-        if(!createdUser) {
+		if (!createdUser) {
 			return null;
 		}
 		sendEmail(firstName, lastName, email);
@@ -40,13 +41,7 @@ const login = async ({ email, password }) => {
 			return null;
 		}
 
-		return {
-			firstname: user.firstName,
-			lastname: user.lastName,
-			email: user.email,
-			photo: user.photo,
-			roleId: user.roleId,
-		};
+		return createAccessToken(user);
 	} catch (error) {
 		throw error;
 	}
