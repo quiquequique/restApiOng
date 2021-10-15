@@ -19,13 +19,13 @@ const loginUser = async (req, res) => {
 	const data = req.body;
 
 	try {
-		const user = await login(data);
+		const accessToken = await login(data);
 
-		if (user === null) {
+		if (accessToken === null) {
 			return res.status(401).json({ ok: false, msg: INVALID_CREDENTIAL });
 		}
 
-		return res.status(202).json({ user });
+		return res.status(202).json({ accessToken });
 	} catch (error) {
 		return res.status(500).json({ error: error.message });
 	}
