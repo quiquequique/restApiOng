@@ -7,7 +7,7 @@ var router = express.Router();
 //post
 //router.post("/", slidesController.create);
 //get by id
-//router.get("/:id", slidesController.findById);
+router.get("/:id", slidesController.findById);
 //get by nombre
 //router.get("/:name", slidesController.findByName);
 //patch by id

@@ -20,6 +20,20 @@ var controller = {
         res.json(error);
       });
   },
+  findById: (req, res) => {
+    Slide.findByPk(req.params.id)
+      .then((post) => {
+        if(post=="null"){
+          res.json(post);
+          res.status(200);
+        }
+        res.json('El slide no existe');
+        res.status(404);
+      })
+      .catch((error) => {
+        res.json(error);
+      });
+  },
 };
 
 module.exports = controller;
