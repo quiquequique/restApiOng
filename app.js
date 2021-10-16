@@ -15,6 +15,7 @@ const newRouter = require('./routes/new');
 const membersRouter = require('./routes/members');
 const imagesRouter = require('./routes/images');
 const rolesRouter = require("./routes/roles.routes.js"); 
+const slidesRouter = require('./routes/slides.routes')
 
 const app = express();
 app.use(cors());
@@ -38,7 +39,9 @@ app.use('/categories', categoriesRouter);
 app.use('/news', newRouter);
 app.use('/', imagesRouter);
 app.use("/roles", rolesRouter); 
+app.use('/slides',slidesRouter);
 // catch 404 and forward to error handler
+/*
 app.use(function (req, res, next) {
   next(createError(404));
 });
@@ -53,5 +56,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+*/
 module.exports = app;
