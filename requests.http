@@ -4,14 +4,26 @@ GET  http://localhost:3000/users/
 ### GET ROLES
 GET  http://localhost:3000/roles/
 
-### GET CATEGORIES
+
+#-----CATEGORIES------#
+### GET ALL CATEGORIES
 GET  http://localhost:3000/categories
 
 ### GET CATEGORY by ID
 GET  http://localhost:3000/categories/3
 
-
-
 ### DELETE CATEGORY by ID
 
 DELETE  http://localhost:3000/categories/2
+
+#-----IMAGES------#
+### UPLOAD IMAGE
+
+http://127.0.0.1:3000/images/upload
+
+#-----MEMBERS------#
+### GET ALL MEMBERS
+
+GET  http://localhost:3000/members/
+
+### GET MEMBER
