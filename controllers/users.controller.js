@@ -1,4 +1,4 @@
-const { register, login } = require("../services/users.services");
+const { register, login } = require("../Services/users.services");
 
 const { REGISTER_SUCCESS, INVALID_CREDENTIAL } = require("../helpers/messages");
 
