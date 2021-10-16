@@ -11,7 +11,8 @@ module.exports = {
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique est risus",
 					image:
 						"https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
-						
+					createdAt: new Date(),
+					updatedAt: new Date()
 				},
 			],
 			{}

@@ -1,5 +1,7 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 
+// eslint-disable-next-line import/no-unresolved
 const { getAllOrganization } = require('../services/dbOrganization');
 
 const errors = require('../helpers/resError.helper');
@@ -9,25 +11,29 @@ const controller = {
 
   getAll: async (req, res) => {
     try {
-      const organization = await getAllOrganization();
+      const organizations = await getAllOrganization();
 
-      if (organization.length !== 0) {
+      if (organizations.length !== 0) {
+        const dataArray = [];
+        for (const organization of organizations) {
+          dataArray.push(
+            {
+              name: organization.name,
+              image: organization.image,
+              phone: organization.phone,
+              address: organization.address
+            }
+          );
+        }
         return res.json({
 
           meta: {
 
             status: '200',
             link: '/organization/public',
-            count: organization.length
+            count: organizations.length
           },
-          data: {
-
-            name: organization[0].name,
-            image: organization[0].image,
-            phone: organization[0].phone,
-            address: organization[0].address
-
-          }
+          data: dataArray
         });
       }
 
