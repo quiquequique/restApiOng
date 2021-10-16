@@ -1,6 +1,6 @@
 const dayjs = require("dayjs");
 const { AUTH_TOKEN_ERROR, AUTH_TOKEN_EXPIRED } = require("../helpers/messages");
-const { decodeToken } = require("../services/jwt.services");
+const { decodeToken } = require("../Services/jwt.services");
 
 exports.isAuthenticated = (req, res, next) => {
 	const authorization = req.headers.authorization;
