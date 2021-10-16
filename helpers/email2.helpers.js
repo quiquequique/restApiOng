@@ -4,8 +4,8 @@ class EmailData {
     this.lastName = lName;
     this.emailSubject = 'Subject email ong1';
     this.emailLogo = 'https://seeklogo.com/images/1/2-minutos-logo-AD6BFBF62E-seeklogo.com.png';
-    this.emailTitle = `Título de ONG1 email: hola ${fName} ${lName} `;
-    this.emailText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan orci nunc. Sed vel blandit quam. Nunc fermentum ante non pellentesque tincidunt. Phasellus eu diam ac magna tincidunt malesuada. Aliquam iaculis leo at sapien bibendum laoreet. Nam sit amet felis vel nunc vehicula congue vitae eget quam. Curabitur eget orci sit amet quam pulvinar lacinia. Donec eget varius ligula. Ut ornare neque enim, accumsan molestie justo dictum eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales dui et lorem auctor volutpat. Quisque accumsan nisi ac tellus tempus aliquet.';
+    this.emailTitle = `Título de ONG1 email: Para ${fName} ${lName} `;
+    this.emailText = `  Hola ${fName} buen dia, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan orci nunc. Sed vel blandit quam. Nunc fermentum ante non pellentesque tincidunt. Phasellus eu diam ac magna tincidunt malesuada. Aliquam iaculis leo at sapien bibendum laoreet. Nam sit amet felis vel nunc vehicula congue vitae eget quam. Curabitur eget orci sit amet quam pulvinar lacinia. Donec eget varius ligula. Ut ornare neque enim, accumsan molestie justo dictum eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales dui et lorem auctor volutpat. Quisque accumsan nisi ac tellus tempus aliquet.`;
     this.ongContact = 'Datos de contacto de ONG1-- www.ong1.com';
     this.emailHtml = `
   <!doctype html>
