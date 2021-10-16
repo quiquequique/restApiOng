@@ -9,8 +9,12 @@ var controller = {
       },
     })
       .then((result) => {
-        res.json(result);
-        res.status(200);
+        if(result!=0){
+          res.json(result);
+          res.status(200);
+        }
+        res.json('La imagen no existe');
+        res.status(404);
       })
       .catch((error) => {
         res.json(error);
