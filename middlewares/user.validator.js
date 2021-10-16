@@ -8,7 +8,7 @@ const {
 	INVALID_CREDENTIAL,
 } = require("../helpers/messages");
 
-const { isRegister } = require("../services/users.services");
+const { isRegister } = require("../Services/users.services");
 
 exports.registerValidator = [
 	body("firstName")

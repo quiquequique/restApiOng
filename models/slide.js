@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     organizationId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'slide',
+    modelName: 'Slide',
   });
   return slide;
 };
