@@ -4,6 +4,10 @@ GET  http://localhost:3000/users/
 ### GET ROLES
 GET  http://localhost:3000/roles/
 
+
+### GET ROLE BY ID 
+GET  http://localhost:3000/roles/1
+
 ### GET CATEGORIES
 GET  http://localhost:3000/categories
 
