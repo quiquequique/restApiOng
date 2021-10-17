@@ -4,11 +4,13 @@ const {
   CreateNews,
   getNewsById,
   DeleteNews,
+  getAllNews,
 } = require("../controllers/new");
 const router = Router();
 
-router.put("/news/:id", updateNews);
-router.get("/news/:id", getNewsById);
-router.post("news", CreateNews);
-router.delete("/news/:id", DeleteNews);
+router.put("/:id", updateNews);
+router.get("/:id", getNewsById);
+router.post("/", CreateNews);
+router.get("/", getAllNews);
+router.delete("/:id", DeleteNews);
 module.exports = router;

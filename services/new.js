@@ -1,5 +1,9 @@
 const { New } = require("../models");
 
+const getallnews = async () => {
+  const news = await New.findAll();
+  return news;
+};
 const createNews = async (body) => {
   body.type = "news";
   const name = typeof body.name !== "undefined";
@@ -42,8 +46,13 @@ const checkExistNew = async (id) => {
 };
 const deleteNews = async (id) => {
   const exist = await checkExistNew(id);
+  console.log(exist);
   if (exist) {
-    return await New.destroy(id);
+    const resp = await New.destroy({
+      where: { id },
+    });
+    console.log(resp);
+    return resp;
   }
   return false;
 };
@@ -51,6 +60,7 @@ module.exports = {
   updateNew,
   checkExistNew,
   createNews,
+  getallnews,
   newsdetail,
   deleteNews,
 };

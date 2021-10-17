@@ -3,11 +3,19 @@ const {
   newsdetail,
   createNews,
   deleteNews,
+  getallnews,
 } = require("../services/new");
+const { DELETED_DONE, UPADATED_DONE } = require("../helpers/messages");
+
 const errors = require("../helpers/resError.helper");
 
-const getAllNews = (req, res) => {
-  res.send("List of News");
+const getAllNews = async (req, res) => {
+  try {
+    const resp = await getallnews();
+    res.send(resp);
+  } catch (err) {
+    res.status(500).send(errors._500);
+  }
 };
 
 const getNewsById = async (req, res) => {
@@ -19,7 +27,7 @@ const getNewsById = async (req, res) => {
     }
     res.status(200).json(details);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
@@ -32,7 +40,7 @@ const CreateNews = async (req, res) => {
     }
     res.status(201).json(newcreated);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
@@ -44,9 +52,9 @@ const updateNews = async (req, res) => {
     if (!newUpdate) {
       return res.status(404).json(errors._404);
     }
-    res.status(200).json(newUpdate);
+    res.status(200).json(UPADATED_DONE);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
@@ -57,9 +65,9 @@ const DeleteNews = async (req, res) => {
     if (!newdelete) {
       return res.status(404).json(errors._404);
     }
-    res.status(200).json(newdelete);
+    res.status(200).json(DELETED_DONE);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
