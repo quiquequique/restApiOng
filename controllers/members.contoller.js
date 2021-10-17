@@ -1,9 +1,13 @@
+/* eslint-disable spaced-comment */
 //get all members
+const errors = require('../helpers/resError.helper');
+
 const getAllMembers = (_, res) => {
   try {
     res.send('list of all members');
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -14,7 +18,8 @@ const getMemberById = (req, res) => {
   try {
     res.send('member by id:' + id);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -25,7 +30,8 @@ const createMember = (req, res) => {
   try {
     res.send('new member created: ' + newMember);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -36,7 +42,8 @@ const updateMember = (req, res) => {
   try {
     res.send('member updated: ' + id);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
@@ -47,7 +54,8 @@ const deleteMember = (req, res) => {
   try {
     res.send('member deleted: ' + id);
   } catch (err) {
-    res.status(500).json({ err });
+    console.error(err);
+    res.status(500).json(errors._500);
   }
 };
 
