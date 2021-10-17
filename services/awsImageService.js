@@ -1,4 +1,4 @@
-const AWS = require("aws-sdk");
+const AWS = require('aws-sdk');
 
 // .env
 const ID = process.env.AWS_ID;
@@ -22,8 +22,8 @@ async function uploadImageService(imageKey, buffer) {
   try {
     const response = await s3.upload(params).promise();
     return response;
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     throw new Error();
   }
 }

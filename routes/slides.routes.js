@@ -3,16 +3,16 @@ var slidesController = require("../controllers/slides");
 var router = express.Router();
 
 /* GET roles listing. */
-//router.get("/", slidesController.all);
+router.get("/", slidesController.getAllSlides);
 //post
 //router.post("/", slidesController.create);
 //get by id
-router.get("/:id", slidesController.findById);
+router.get("/:id", slidesController.getSlideById);
 //get by nombre
 //router.get("/:name", slidesController.findByName);
 //patch by id
 //router.get("/:id", slidesController.update);
 //delete by id
-router.delete("/:id", slidesController.delete);
+router.delete("/:id", slidesController.deleteSlide);
 
 module.exports = router;

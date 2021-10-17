@@ -1,13 +1,13 @@
 const { uploadImageService } = require('../services/awsImageService');
+const errors = require('../helpers/resError.helper');
 
-//upload image
 const uploadImagen = async (req, res) => {
   const { originalname, buffer } = req.file;
   try {
     const imagen = await uploadImageService(originalname, buffer);
     res.json({ imgUrl: imagen.Location });
   } catch (err) {
-    res.status(500).json({ err });
+    res.status(500).json(errors._500);
   }
 };
 

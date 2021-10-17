@@ -7,15 +7,19 @@ const REGISTER_SUCCESS = "User successfully registered.";
 const AUTH_TOKEN_ERROR = "No authorization token was found.";
 const AUTH_TOKEN_EXPIRED = "The authorization token has expired.";
 const INVALID_CREDENTIAL = "The username or password is incorrect";
+const DELETED_DONE = "Successfully removed";
+const UPADATED_DONE = "Successful update";
 
 module.exports = {
-	INVALID_EMAIL,
-	EXIST_EMAIL,
-	NOT_EMPTY,
-	MIN_LENGTH_3,
-	PASSWORD_LENGTH,
-	REGISTER_SUCCESS,
-	AUTH_TOKEN_ERROR,
-	AUTH_TOKEN_EXPIRED,
-	INVALID_CREDENTIAL,
+  INVALID_EMAIL,
+  EXIST_EMAIL,
+  NOT_EMPTY,
+  MIN_LENGTH_3,
+  PASSWORD_LENGTH,
+  REGISTER_SUCCESS,
+  AUTH_TOKEN_ERROR,
+  AUTH_TOKEN_EXPIRED,
+  DELETED_DONE,
+  INVALID_CREDENTIAL,
+  UPADATED_DONE,
 };
