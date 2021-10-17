@@ -1,0 +1,51 @@
+
+###
+GET http://localhost:3000/organization/public
+
+###
+DELETE http://localhost:3000/categories/5
+
+###
+POST http://localhost:3000/users/auth/register
+Content-Type: application/json
+
+{
+    "firstName":"Enrique",
+	"lastName":"Abramzon",
+	"email":"eabramzon@hotmail.com",
+	"password":"37373737"
+}
+
+### GET USERS 
+GET  http://localhost:3000/users/
+
+### GET ROLES
+GET  http://localhost:3000/roles/
+
+### GET USERS 
+GET  http://localhost:3000/users/
+
+### GET ROLES
+GET  http://localhost:3000/roles/
+
+
+### GET ROLE BY ID 
+GET  http://localhost:3000/roles/1
+
+### GET CATEGORIES
+GET  http://localhost:3000/categories
+
+### GET CATEGORY by ID
+GET  http://localhost:3000/categories/3
+
+### DELETE SLIDE by ID
+
+DELETE  http://localhost:3000/slides/1
+
+### GET SLIDE by ID
+
+GET  http://localhost:3000/slides/30
+
+### DELETE CATEGORY by ID
+
+DELETE  http://localhost:3000/categories/2
