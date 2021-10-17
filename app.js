@@ -12,8 +12,8 @@ const categoriesRouter = require('./routes/categories.routes');
 const activitiesRouter = require('./routes/activities.routes');
 const organizationRouter = require('./routes/organization.routes');
 const newRouter = require('./routes/new');
-const membersRouter = require('./routes/members');
-const imagesRouter = require('./routes/images');
+const membersRouter = require('./routes/members.routes');
+const imagesRouter = require('./routes/images.routes');
 const rolesRouter = require("./routes/roles.routes.js"); 
 const slidesRouter = require('./routes/slides.routes')
 
