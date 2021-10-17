@@ -3,11 +3,19 @@ const {
   newsdetail,
   createNews,
   deleteNews,
+  getallnews,
 } = require("../services/new");
+const { New } = require("../models/");
+
 const errors = require("../helpers/resError.helper");
 
-const getAllNews = (req, res) => {
-  res.send("List of News");
+const getAllNews = async (req, res) => {
+  try {
+    const resp = await getallnews();
+    res.send(resp);
+  } catch (err) {
+    res.status(500).send(errors._500);
+  }
 };
 
 const getNewsById = async (req, res) => {
@@ -19,7 +27,7 @@ const getNewsById = async (req, res) => {
     }
     res.status(200).json(details);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
@@ -32,7 +40,7 @@ const CreateNews = async (req, res) => {
     }
     res.status(201).json(newcreated);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
@@ -46,7 +54,7 @@ const updateNews = async (req, res) => {
     }
     res.status(200).json(newUpdate);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 
@@ -59,7 +67,7 @@ const DeleteNews = async (req, res) => {
     }
     res.status(200).json(newdelete);
   } catch (e) {
-    res.status(500).json(e.message);
+    res.status(500).send(errors._500);
   }
 };
 

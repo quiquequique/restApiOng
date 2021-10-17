@@ -20,6 +20,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       categoryId: {
         type: Sequelize.STRING,
       },

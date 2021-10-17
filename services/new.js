@@ -1,5 +1,9 @@
 const { New } = require("../models");
 
+const getallnews = async () => {
+  const news = await New.findAll();
+  return news;
+};
 const createNews = async (body) => {
   body.type = "news";
   const name = typeof body.name !== "undefined";
@@ -51,6 +55,7 @@ module.exports = {
   updateNew,
   checkExistNew,
   createNews,
+  getallnews,
   newsdetail,
   deleteNews,
 };
