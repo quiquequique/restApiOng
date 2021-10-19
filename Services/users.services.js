@@ -56,8 +56,25 @@ const isRegister = async (email) => {
 	return true;
 };
 
+const patchUser = async (id, data) => {
+	Object.keys(data).forEach((k) => data[k] === "" && delete data[k]);
+
+	if (data.password) {
+		data.password = bcrypt.hashSync(data.password, 10);
+	}
+
+	const isUpdated = await User.update(data, { where: { id } });
+
+	if (isUpdated[0] === 0) {
+		return false;
+	}
+
+	return true;
+};
+
 module.exports = {
 	register,
 	login,
 	isRegister,
+	patchUser,
 };

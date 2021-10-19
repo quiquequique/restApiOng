@@ -14,8 +14,6 @@ const createAccessToken = (data) => {
 		roleId,
 	};
 
-	console.log(payload);
-
 	return jwt.sign(payload, secretKey, { expiresIn: "12h" });
 };
 

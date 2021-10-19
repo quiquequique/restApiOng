@@ -1,6 +1,11 @@
-const { register, login } = require("../Services/users.services");
+const { register, login, patchUser } = require("../Services/users.services");
 
-const { REGISTER_SUCCESS, INVALID_CREDENTIAL } = require("../helpers/messages");
+const {
+	REGISTER_SUCCESS,
+	INVALID_CREDENTIAL,
+	UPDATE_FAIL,
+	UPDATED_DONE,
+} = require("../helpers/messages");
 
 //Register new user
 const addUser = async (req, res) => {
@@ -31,7 +36,21 @@ const loginUser = async (req, res) => {
 	}
 };
 
+const updateUser = async (req, res) => {
+	const { id } = req.params;
+	const data = req.body;
+
+	const updatedUser = await patchUser(id, data);
+
+	if (!updatedUser) {
+		return res.status(404).json({ ok: false, msg: UPDATE_FAIL, updateUser });
+	}
+
+	return res.status(200).json({ ok: true, msg: UPDATED_DONE });
+};
+
 module.exports = {
 	addUser,
 	loginUser,
+	updateUser,
 };
