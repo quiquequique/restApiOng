@@ -29,7 +29,7 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 const login = async ({ email, password }) => {
 	try {
 		const user = await User.findOne({
-			where: { email },
+			where: { email, deletedAt: null },
 		});
 
 		if (!user) {
