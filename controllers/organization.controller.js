@@ -26,7 +26,7 @@ const controller = {
       const bodyData = req.body;
       const updateOrg = await updateOrganization(bodyData, id);
       if (updateOrg !== null) {
-        return res.status(200).json(updateOrg);
+        return res.json(updateOrg);
       }
       return res.status(404).json(errors._404);
     } catch (error) {
