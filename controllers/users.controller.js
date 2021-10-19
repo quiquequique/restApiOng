@@ -1,6 +1,11 @@
-const { register, login } = require("../Services/users.services");
+const { register, login, deleteUser } = require("../Services/users.services");
 
-const { REGISTER_SUCCESS, INVALID_CREDENTIAL } = require("../helpers/messages");
+const {
+	REGISTER_SUCCESS,
+	INVALID_CREDENTIAL,
+	DELETE_FAIL,
+	DELETED_DONE,
+} = require("../helpers/messages");
 
 //Register new user
 const addUser = async (req, res) => {
@@ -31,7 +36,20 @@ const loginUser = async (req, res) => {
 	}
 };
 
+const disableUser = async (req, res) => {
+	const { id } = req.params;
+
+	const isDeleted = await deleteUser(id);
+
+	if (!isDeleted) {
+		return res.status(404).json({ ok: false, msg: DELETE_FAIL });
+	}
+
+	return res.status(200).json({ ok: true, msg: DELETED_DONE });
+};
+
 module.exports = {
 	addUser,
 	loginUser,
+	disableUser,
 };

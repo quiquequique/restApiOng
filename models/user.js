@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 			password: { type: DataTypes.STRING, allowNull: false },
 			photo: { type: DataTypes.STRING, allowNull: true, defaultValue: null },
 			roleId: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 2 },
+			deletedAt: { type: DataTypes.DATE, allowNull: true, defaultValue: null },
 		},
 		{
 			sequelize,
