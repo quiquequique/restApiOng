@@ -9,6 +9,7 @@ const AUTH_TOKEN_EXPIRED = "The authorization token has expired.";
 const INVALID_CREDENTIAL = "The username or password is incorrect";
 const DELETED_DONE = "Successfully removed";
 const UPADATED_DONE = "Successful update";
+const NOT_ADMIN = "The user is not authorized to access this page.";
 const DELETE_FAIL = "Error while delete";
 
 module.exports = {
@@ -23,5 +24,6 @@ module.exports = {
 	DELETED_DONE,
 	INVALID_CREDENTIAL,
 	UPADATED_DONE,
+	NOT_ADMIN,
 	DELETE_FAIL,
 };
