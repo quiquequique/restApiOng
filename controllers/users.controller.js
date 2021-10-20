@@ -1,8 +1,15 @@
-const { register, login, deleteUser } = require("../Services/users.services");
+const {
+	register,
+	login,
+	patchUser,
+	deleteUser,
+} = require("../Services/users.services");
 
 const {
 	REGISTER_SUCCESS,
 	INVALID_CREDENTIAL,
+	UPDATE_FAIL,
+	UPDATED_DONE,
 	DELETE_FAIL,
 	DELETED_DONE,
 } = require("../helpers/messages");
@@ -36,10 +43,25 @@ const loginUser = async (req, res) => {
 	}
 };
 
+const updateUser = async (req, res) => {
+	const { id } = req.params;
+	const data = req.body;
+
+	const updatedUser = await patchUser(id, data);
+
+	if (!updatedUser) {
+		return res.status(404).json({ ok: false, msg: UPDATE_FAIL, updateUser });
+	}
+
+	return res.status(200).json({ ok: true, msg: UPDATED_DONE });
+};
+
 const disableUser = async (req, res) => {
 	const { id } = req.params;
 
 	const isDeleted = await deleteUser(id);
+
+	console.log(isDeleted);
 
 	if (!isDeleted) {
 		return res.status(404).json({ ok: false, msg: DELETE_FAIL });
@@ -51,5 +73,6 @@ const disableUser = async (req, res) => {
 module.exports = {
 	addUser,
 	loginUser,
+	updateUser,
 	disableUser,
 };
