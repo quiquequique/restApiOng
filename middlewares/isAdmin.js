@@ -7,7 +7,9 @@ exports.isAdmin = (req, res, next) => {
 
 	const { roleId } = decodeToken(token);
 
-	if (roleId !== "1") {
+	console.log(roleId);
+
+	if (roleId !== 1) {
 		return res.status(401).json({ ok: false, msg: NOT_ADMIN });
 	}
 
