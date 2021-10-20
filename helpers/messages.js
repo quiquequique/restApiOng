@@ -9,17 +9,19 @@ const AUTH_TOKEN_EXPIRED = "The authorization token has expired.";
 const INVALID_CREDENTIAL = "The username or password is incorrect";
 const DELETED_DONE = "Successfully removed";
 const UPADATED_DONE = "Successful update";
+const DELETE_FAIL = "Error while delete";
 
 module.exports = {
-  INVALID_EMAIL,
-  EXIST_EMAIL,
-  NOT_EMPTY,
-  MIN_LENGTH_3,
-  PASSWORD_LENGTH,
-  REGISTER_SUCCESS,
-  AUTH_TOKEN_ERROR,
-  AUTH_TOKEN_EXPIRED,
-  DELETED_DONE,
-  INVALID_CREDENTIAL,
-  UPADATED_DONE,
+	INVALID_EMAIL,
+	EXIST_EMAIL,
+	NOT_EMPTY,
+	MIN_LENGTH_3,
+	PASSWORD_LENGTH,
+	REGISTER_SUCCESS,
+	AUTH_TOKEN_ERROR,
+	AUTH_TOKEN_EXPIRED,
+	DELETED_DONE,
+	INVALID_CREDENTIAL,
+	UPADATED_DONE,
+	DELETE_FAIL,
 };
