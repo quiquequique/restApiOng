@@ -1,15 +1,16 @@
-const INVALID_EMAIL = "Invalid email address.";
-const EXIST_EMAIL = "Email address already exists.";
-const NOT_EMPTY = "Field cannot be empty.";
-const MIN_LENGTH_3 = "Must contain at least 3 characters.";
+const INVALID_EMAIL = 'Invalid email address.';
+const EXIST_EMAIL = 'Email address already exists.';
+const NOT_EMPTY = 'Field cannot be empty.';
+const MIN_LENGTH_3 = 'Must contain at least 3 characters.';
 const MIN_LENGTH_10 = 'Must contain at least 10 characters.';
-const PASSWORD_LENGTH = "Password must be 6-16 characters.";
-const REGISTER_SUCCESS = "User successfully registered.";
-const AUTH_TOKEN_ERROR = "No authorization token was found.";
-const AUTH_TOKEN_EXPIRED = "The authorization token has expired.";
-const INVALID_CREDENTIAL = "The username or password is incorrect";
-const DELETED_DONE = "Successfully removed";
-const UPADATED_DONE = "Successful update";
+const PASSWORD_LENGTH = 'Password must be 6-16 characters.';
+const REGISTER_SUCCESS = 'User successfully registered.';
+const AUTH_TOKEN_ERROR = 'No authorization token was found.';
+const AUTH_TOKEN_EXPIRED = 'The authorization token has expired.';
+const INVALID_CREDENTIAL = 'The username or password is incorrect';
+const DELETED_DONE = 'Successfully removed';
+const UPADATED_DONE = 'Successful update';
+const DELETE_FAIL = 'Error while delete';
 
 module.exports = {
   INVALID_EMAIL,
@@ -24,4 +25,5 @@ module.exports = {
   DELETED_DONE,
   INVALID_CREDENTIAL,
   UPADATED_DONE,
+  DELETE_FAIL,
 };

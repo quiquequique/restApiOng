@@ -3,6 +3,7 @@ const sendEmail = require("../Services/welcomeEmail.services");
 
 const { User } = require("../models");
 const { createAccessToken } = require("./jwt.services");
+const dayjs = require("dayjs");
 
 const register = ({ firstName, lastName, email, photo, password }) => {
 	const newUser = {
@@ -28,7 +29,7 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 const login = async ({ email, password }) => {
 	try {
 		const user = await User.findOne({
-			where: { email },
+			where: { email, deletedAt: null },
 		});
 
 		if (!user) {
@@ -56,8 +57,22 @@ const isRegister = async (email) => {
 	return true;
 };
 
+const deleteUser = async (id) => {
+	const isDeleted = await User.update(
+		{ deletedAt: dayjs().format("YYYY-MM-DD hh:mm:ss") },
+		{ where: { id, deletedAt: null } }
+	);
+
+	if (isDeleted[0] === 0) {
+		return false;
+	}
+
+	return true;
+};
+
 module.exports = {
 	register,
 	login,
 	isRegister,
+	deleteUser,
 };
