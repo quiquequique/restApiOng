@@ -1,8 +1,9 @@
 const {
   getAllSlide,
   getSlide,
-  SlideDelete
-} = require('../services/slide.services');
+  SlideDelete,
+  putSlide
+} = require('../Services/slide.services');
 const errors = require('../helpers/resError.helper');
 
 // get all slides
@@ -40,20 +41,25 @@ const createCategory = (req, res) => {
     res.status(500).json(errors._500);
   }
 };
+*/
 
 // update category
-const updateCategory = (req, res) => {
-  const { id } = req.params;
-
+const updateSlide = async  (req, res) => {
+	const { id } = req.params;
+	const body = req.body;
   try {
-    res.send('category updated: ' + id);
+    const updatedSlide = await putSlide(body, id);
+    if(updatedSlide){
+      res.status(200).json({ meta: { deleted: true } });
+    } else {
+      res.status(404).json(errors._404);
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json(errors._500);
   }
 };
 
-*/
 // delete category
 const deleteSlide = async (req, res) => {
   const idToDelete = req.params.id;
@@ -76,7 +82,7 @@ module.exports = {
   getAllSlides,
   getSlideById,
   //createCategory,
-  //updateCategory,
+  updateSlide,
   deleteSlide
 };
 /*
