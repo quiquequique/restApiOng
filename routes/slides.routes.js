@@ -1,18 +1,19 @@
 var express = require("express");
 var slidesController = require("../controllers/slides");
+var {isAdmin} = require("../middlewares/isAdmin"); 
 var router = express.Router();
 
 /* GET roles listing. */
-router.get("/", slidesController.getAllSlides);
+router.get("/",[isAdmin], slidesController.getAllSlides);
 //post
 //router.post("/", slidesController.create);
 //get by id
-router.get("/:id", slidesController.getSlideById);
+router.get("/:id",[isAdmin], slidesController.getSlideById);
 //get by nombre
 //router.get("/:name", slidesController.findByName);
 //patch by id
 //router.get("/:id", slidesController.update);
 //delete by id
-router.delete("/:id", slidesController.deleteSlide);
+router.delete("/:id",[isAdmin], slidesController.deleteSlide);
 
 module.exports = router;
