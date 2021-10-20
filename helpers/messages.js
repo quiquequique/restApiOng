@@ -10,6 +10,7 @@ const INVALID_CREDENTIAL = "The username or password is incorrect";
 const DELETED_DONE = "Successfully removed";
 const UPADATED_DONE = "Successful update";
 const NOT_ADMIN = "The user is not authorized to access this page.";
+const DELETE_FAIL = "Error while delete";
 
 module.exports = {
 	INVALID_EMAIL,
@@ -24,4 +25,5 @@ module.exports = {
 	INVALID_CREDENTIAL,
 	UPADATED_DONE,
 	NOT_ADMIN,
+	DELETE_FAIL,
 };
