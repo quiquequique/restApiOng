@@ -11,6 +11,8 @@ const INVALID_CREDENTIAL = 'The username or password is incorrect';
 const DELETED_DONE = 'Successfully removed';
 const UPADATED_DONE = 'Successful update';
 const DELETE_FAIL = 'Error while delete';
+const INVALID_INPUT = 'Invalid input for field';
+const INVALID_URL = 'URL not valid for image';
 
 module.exports = {
   INVALID_EMAIL,
@@ -26,4 +28,6 @@ module.exports = {
   INVALID_CREDENTIAL,
   UPADATED_DONE,
   DELETE_FAIL,
+  INVALID_INPUT,
+  INVALID_URL
 };
