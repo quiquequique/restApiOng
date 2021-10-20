@@ -1,3 +1,4 @@
+
 const INVALID_EMAIL = 'Invalid email address.';
 const EXIST_EMAIL = 'Email address already exists.';
 const NOT_EMPTY = 'Field cannot be empty.';
@@ -10,7 +11,9 @@ const AUTH_TOKEN_EXPIRED = 'The authorization token has expired.';
 const INVALID_CREDENTIAL = 'The username or password is incorrect';
 const DELETED_DONE = 'Successfully removed';
 const UPADATED_DONE = 'Successful update';
+const UPDATE_FAIL = 'Unsuccessful update';
 const DELETE_FAIL = 'Error while delete';
+const NOT_ADMIN = 'The user is not authorized to access this page.';
 const INVALID_INPUT = 'Invalid input for field';
 const INVALID_URL = 'URL not valid for image';
 
@@ -27,6 +30,8 @@ module.exports = {
   DELETED_DONE,
   INVALID_CREDENTIAL,
   UPADATED_DONE,
+  UPDATE_FAIL,
+  NOT_ADMIN,
   DELETE_FAIL,
   INVALID_INPUT,
   INVALID_URL

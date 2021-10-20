@@ -2,9 +2,9 @@ var { Router } = require("express");
 const {
 	addUser,
 	loginUser,
+	updateUser,
 	disableUser,
 } = require("../controllers/users.controller");
-const { isAuthenticated } = require("../middlewares/isAuthenticated");
 const {
 	registerValidator,
 	loginValidator,
@@ -16,9 +16,10 @@ const router = Router();
 router.post("/auth/register", [registerValidator], addUser);
 router.post("/auth/login", [loginValidator], loginUser);
 
+router.patch("/:id", updateUser);
 router.delete("/:id", disableUser);
+
 // router.get('/', getUsers);
 // router.get('/:id', getUserByID);
-// router.put('/:id', editUser);
 
 module.exports = router;
