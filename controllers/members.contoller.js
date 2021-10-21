@@ -1,68 +1,56 @@
-/* eslint-disable spaced-comment */
+const { ADDED_DONE } = require('../helpers/messages');
+const { addMember } = require('../services/members.services');
+
 //get all members
-const errors = require('../helpers/resError.helper');
-
 const getAllMembers = (_, res) => {
-  try {
-    res.send('list of all members');
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
-};
-
-//get a single member
-const getMemberById = (req, res) => {
-  const { id } = req.params;
-
-  try {
-    res.send('member by id:' + id);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		res.send('list of all members');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(errors._500);
+	}
 };
 
 //create member
-const createMember = (req, res) => {
-  const { newMember } = req.body;
+const addNewMember = async (req, res) => {
+	const data = req.body;
 
-  try {
-    res.send('new member created: ' + newMember);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		const newMember = await addMember(data);
+		return res.status(201).json({ msg: ADDED_DONE, newMember });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(errors._500);
+	}
 };
 
 //update member
 const updateMember = (req, res) => {
-  const { id } = req.params;
+	const { id } = req.params;
 
-  try {
-    res.send('member updated: ' + id);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		res.send('member updated: ' + id);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(errors._500);
+	}
 };
 
 //delete member
 const deleteMember = (req, res) => {
-  const { id } = req.params;
+	const { id } = req.params;
 
-  try {
-    res.send('member deleted: ' + id);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		res.send('member deleted: ' + id);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(errors._500);
+	}
 };
 
 module.exports = {
-  getAllMembers,
-  getMemberById,
-  createMember,
-  updateMember,
-  deleteMember
+	getAllMembers,
+	addNewMember,
+	updateMember,
+	deleteMember,
 };
