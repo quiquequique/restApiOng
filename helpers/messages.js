@@ -1,4 +1,3 @@
-
 const INVALID_EMAIL = 'Invalid email address.';
 const EXIST_EMAIL = 'Email address already exists.';
 const NOT_EMPTY = 'Field cannot be empty.';
@@ -8,6 +7,7 @@ const PASSWORD_LENGTH = 'Password must be 6-16 characters.';
 const REGISTER_SUCCESS = 'User successfully registered.';
 const AUTH_TOKEN_ERROR = 'No authorization token was found.';
 const AUTH_TOKEN_EXPIRED = 'The authorization token has expired.';
+const AUTH_TOKEN_INVALID = 'The authorization token is invalid.';
 const INVALID_CREDENTIAL = 'The username or password is incorrect';
 const DELETED_DONE = 'Successfully removed';
 const UPADATED_DONE = 'Successful update';
@@ -18,21 +18,22 @@ const INVALID_INPUT = 'Invalid input for field';
 const INVALID_URL = 'URL not valid for image';
 
 module.exports = {
-  INVALID_EMAIL,
-  EXIST_EMAIL,
-  NOT_EMPTY,
-  MIN_LENGTH_3,
-  MIN_LENGTH_10,
-  PASSWORD_LENGTH,
-  REGISTER_SUCCESS,
-  AUTH_TOKEN_ERROR,
-  AUTH_TOKEN_EXPIRED,
-  DELETED_DONE,
-  INVALID_CREDENTIAL,
-  UPADATED_DONE,
-  UPDATE_FAIL,
-  NOT_ADMIN,
-  DELETE_FAIL,
-  INVALID_INPUT,
-  INVALID_URL
+	INVALID_EMAIL,
+	EXIST_EMAIL,
+	NOT_EMPTY,
+	MIN_LENGTH_3,
+	MIN_LENGTH_10,
+	PASSWORD_LENGTH,
+	REGISTER_SUCCESS,
+	AUTH_TOKEN_ERROR,
+	AUTH_TOKEN_EXPIRED,
+	AUTH_TOKEN_INVALID,
+	DELETED_DONE,
+	INVALID_CREDENTIAL,
+	UPADATED_DONE,
+	UPDATE_FAIL,
+	NOT_ADMIN,
+	DELETE_FAIL,
+	INVALID_INPUT,
+	INVALID_URL,
 };
