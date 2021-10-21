@@ -126,3 +126,15 @@ Content-Type: application/json
     "order": 2,
 	"organizationId" : 3
 }
+
+
+### CREATE ACTIVITY 
+
+POST  http://localhost:3000/activities
+Content-Type: application/json
+
+{
+	"name":"first activity",
+    "content": "activity content",
+    "image": "http://activity.image.png"
+}
