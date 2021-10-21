@@ -1,5 +1,7 @@
 const { createActivity } = require('../services/activities.services');
 
+const { CREATED_DONE, CREATE_FAIL } = require('../helpers/messages');
+
 const getActivities = (req, res) => {
   res.send('Get all Activities');
 };
@@ -9,9 +11,9 @@ const addActivity = async (req, res) => {
     const { name, content, image } = req.body;
     const newActivity = await createActivity({ name, content, image });
 
-    return res.status(201).json({ msg: newActivity });
+    return res.status(201).json({ msg: CREATED_DONE, newActivity });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: CREATE_FAIL });
   }
 };
 

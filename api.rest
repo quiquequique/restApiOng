@@ -134,7 +134,7 @@ POST  http://localhost:3000/activities
 Content-Type: application/json
 
 {
-	"name":"first activity",
-    "content": "activity content",
+	"name":"dadsadasd",
+    "content": "sadsadasdasdsadsada",
     "image": "http://activity.image.png"
 }
