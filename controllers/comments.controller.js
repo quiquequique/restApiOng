@@ -1,7 +1,9 @@
 const {
   getallcomments,
   create_comment,
+  update_comment,
 } = require("../Services/comments.services");
+const { UPDATED_DONE } = require("../helpers/messages");
 const errors = require("../helpers/resError.helper");
 
 const getAllComments = async (req, res) => {
@@ -30,7 +32,21 @@ const createComment = async (req, res) => {
     body: req.body.body,
   }; */
 };
+const updateComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const resp = await update_comment(data, id);
+    if (!resp) {
+      return res.status(404).json(errors._404);
+    }
+    res.status(200).json(UPDATED_DONE);
+  } catch (e) {
+    res.status(500).send(errors._500);
+  }
+};
 module.exports = {
   getAllComments,
   createComment,
+  updateComment,
 };
