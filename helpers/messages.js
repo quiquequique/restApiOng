@@ -9,8 +9,10 @@ const AUTH_TOKEN_ERROR = 'No authorization token was found.';
 const AUTH_TOKEN_EXPIRED = 'The authorization token has expired.';
 const AUTH_TOKEN_INVALID = 'The authorization token is invalid.';
 const INVALID_CREDENTIAL = 'The username or password is incorrect';
+const CREATED_DONE = 'Successful created';
 const DELETED_DONE = 'Successfully removed';
 const UPADATED_DONE = 'Successful update';
+const CREATE_FAIL = 'Unsuccessful created';
 const UPDATE_FAIL = 'Unsuccessful update';
 const DELETE_FAIL = 'Error while delete';
 const NOT_ADMIN = 'The user is not authorized to access this page.';
@@ -18,22 +20,24 @@ const INVALID_INPUT = 'Invalid input for field';
 const INVALID_URL = 'URL not valid for image';
 
 module.exports = {
-	INVALID_EMAIL,
-	EXIST_EMAIL,
-	NOT_EMPTY,
-	MIN_LENGTH_3,
-	MIN_LENGTH_10,
-	PASSWORD_LENGTH,
-	REGISTER_SUCCESS,
-	AUTH_TOKEN_ERROR,
-	AUTH_TOKEN_EXPIRED,
-	AUTH_TOKEN_INVALID,
-	DELETED_DONE,
-	INVALID_CREDENTIAL,
-	UPADATED_DONE,
-	UPDATE_FAIL,
-	NOT_ADMIN,
-	DELETE_FAIL,
-	INVALID_INPUT,
-	INVALID_URL,
+  INVALID_EMAIL,
+  EXIST_EMAIL,
+  NOT_EMPTY,
+  MIN_LENGTH_3,
+  MIN_LENGTH_10,
+  PASSWORD_LENGTH,
+  REGISTER_SUCCESS,
+  AUTH_TOKEN_ERROR,
+  AUTH_TOKEN_EXPIRED,
+  AUTH_TOKEN_INVALID,
+  DELETED_DONE,
+  INVALID_CREDENTIAL,
+  CREATED_DONE,
+  UPADATED_DONE,
+  CREATE_FAIL,
+  UPDATE_FAIL,
+  NOT_ADMIN,
+  DELETE_FAIL,
+  INVALID_INPUT,
+  INVALID_URL
 };
