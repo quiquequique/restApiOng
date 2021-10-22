@@ -6,7 +6,6 @@ const createActivity = ({ name, content, image }) => {
     content,
     image
   };
-
   try {
     const createdActivity = Activities.create(newActivity);
     if (!createdActivity) {
@@ -18,6 +17,21 @@ const createActivity = ({ name, content, image }) => {
   }
 };
 
+const update = (data, id) => {
+  const updatedActivity = Activities.update(data, {
+    where: { id }
+  });
+  try {
+    if (!updatedActivity) {
+      return null;
+    }
+    return updatedActivity;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
-  createActivity
+  createActivity,
+  update
 };
