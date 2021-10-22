@@ -2,12 +2,15 @@ const express = require('express');
 
 const router = express.Router();
 
-const { addNewMember } = require('../controllers/members.contoller');
+const {
+	addNewMember,
+	getAllMembers,
+} = require('../controllers/members.contoller');
 const { addMemberValidator } = require('../middlewares/members.validator');
 
+router.get('/', getAllMembers);
 router.post('/', [addMemberValidator], addNewMember);
 
-// router.get('/', getAllMembers);
 // router.put('/:id', updateMember);
 // router.delete('/:id', deleteMember);
 

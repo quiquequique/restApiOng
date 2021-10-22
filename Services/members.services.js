@@ -8,6 +8,15 @@ const addMember = (data) => {
 	}
 };
 
+const getMembers = async () => {
+	try {
+		return await Member.findAll();
+	} catch (error) {
+		throw error;
+	}
+};
+
 module.exports = {
 	addMember,
+	getMembers,
 };
