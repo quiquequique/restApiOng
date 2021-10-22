@@ -1,7 +1,7 @@
 const { Organization } = require('../models');
 
 const getOrganization = async () => {
-  const organization = await Organization.findAll({ attributes: ['name', 'image', 'phone', 'address'] });
+  const organization = await Organization.findAll({ attributes: ['name', 'image', 'phone', 'address', 'urlFace', 'urlInsta', 'urlLinked'] });
 
   const organizations = { meta: {
     status: '200',
@@ -19,7 +19,6 @@ const checkIfExistOrg = async (id) => {
   const exist = await Organization.findByPk(id);
   return !!exist;
 };
-
 
 const updateOrganization = async (body, orgId) => {
   try {
