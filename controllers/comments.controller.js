@@ -6,6 +6,7 @@ const getAllComments = async (req, res) => {
     const resp = await getallcomments();
     res.send(resp);
   } catch (err) {
+    console.log("error aqui");
     res.status(500).send(errors._500);
   }
 };

@@ -19,6 +19,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          user_id: "04",
+          body: "muy khvregular",
+          post_id: "045",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
