@@ -2,8 +2,9 @@ const {
   getallcomments,
   create_comment,
   update_comment,
+  delete_comment,
 } = require("../Services/comments.services");
-const { UPDATED_DONE } = require("../helpers/messages");
+const { UPDATED_DONE, DELETED_DONE } = require("../helpers/messages");
 const errors = require("../helpers/resError.helper");
 
 const getAllComments = async (req, res) => {
@@ -11,7 +12,6 @@ const getAllComments = async (req, res) => {
     const resp = await getallcomments();
     res.send(resp);
   } catch (err) {
-    console.log("error aqui");
     res.status(500).send(errors._500);
   }
 };
@@ -45,8 +45,21 @@ const updateComment = async (req, res) => {
     res.status(500).send(errors._500);
   }
 };
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const commentdeleted = await delete_comment(id);
+    if (!commentdeleted) {
+      return res.status(404).json(errors._404);
+    }
+    res.status(200).json(DELETED_DONE);
+  } catch (e) {
+    res.status(500).send(errors._500);
+  }
+};
 module.exports = {
   getAllComments,
   createComment,
   updateComment,
+  deleteComment,
 };

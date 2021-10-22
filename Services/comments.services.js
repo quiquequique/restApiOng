@@ -30,6 +30,16 @@ const update_comment = async (body, id) => {
   }
   return false;
 };
+const delete_comment = async (id) => {
+  const exist = await check_exist_comment(id);
+  if (exist) {
+    const resp = await Comment.destroy({
+      where: { id },
+    });
+    return resp;
+  }
+  return false;
+};
 const check_exist_comment = async (id) => {
   const exist = await Comment.findByPk(id);
   if (!exist) {
@@ -37,8 +47,10 @@ const check_exist_comment = async (id) => {
   }
   return true;
 };
+
 module.exports = {
   getallcomments,
   create_comment,
   update_comment,
+  delete_comment,
 };
