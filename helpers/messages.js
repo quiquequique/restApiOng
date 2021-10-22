@@ -11,7 +11,7 @@ const AUTH_TOKEN_INVALID = 'The authorization token is invalid.';
 const INVALID_CREDENTIAL = 'The username or password is incorrect';
 const CREATED_DONE = 'Successful created';
 const DELETED_DONE = 'Successfully removed';
-const UPADATED_DONE = 'Successful update';
+const UPDATED_DONE = 'Successful update';
 const CREATE_FAIL = 'Unsuccessful created';
 const UPDATE_FAIL = 'Unsuccessful update';
 const DELETE_FAIL = 'Error while delete';
@@ -33,7 +33,7 @@ module.exports = {
   DELETED_DONE,
   INVALID_CREDENTIAL,
   CREATED_DONE,
-  UPADATED_DONE,
+  UPDATED_DONE,
   CREATE_FAIL,
   UPDATE_FAIL,
   NOT_ADMIN,

@@ -1,6 +1,11 @@
-const { createActivity } = require('../services/activities.services');
+const { createActivity, update } = require('../services/activities.services');
 
-const { CREATED_DONE, CREATE_FAIL } = require('../helpers/messages');
+const {
+  CREATED_DONE,
+  CREATE_FAIL,
+  UPDATED_DONE,
+  UPDATE_FAIL
+} = require('../helpers/messages');
 
 const getActivities = (req, res) => {
   res.send('Get all Activities');
@@ -17,11 +22,20 @@ const addActivity = async (req, res) => {
   }
 };
 
-const editActivity = (req, res) => {
+const updateActivity = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
+  try {
+    const updatedActivity = await update(data, id);
 
-  res.json({ msg: `Edit activity with ID = ${id}`, data });
+    if (!updatedActivity) {
+      return res.status(404).json({ msg: UPDATE_FAIL });
+    }
+
+    return res.status(200).json({ msg: UPDATED_DONE });
+  } catch (error) {
+    return res.status(500).json({ error: UPDATE_FAIL });
+  }
 };
 
 const deleteActivity = (req, res) => {
@@ -33,6 +47,6 @@ const deleteActivity = (req, res) => {
 module.exports = {
   getActivities,
   addActivity,
-  editActivity,
+  updateActivity,
   deleteActivity
 };
