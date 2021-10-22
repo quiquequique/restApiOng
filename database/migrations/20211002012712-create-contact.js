@@ -1,4 +1,4 @@
-'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Contacts', {
@@ -18,7 +18,7 @@ module.exports = {
       },
       phone: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       email: {
         type: Sequelize.STRING,
@@ -42,7 +42,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface /* , Sequelize */) => {
     await queryInterface.dropTable('Contacts');
   }
 };
