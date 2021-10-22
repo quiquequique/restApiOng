@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   getAllComments,
+  getCommentsByPostId,
   updateComment,
   createComment,
   deleteComment,
@@ -10,6 +11,7 @@ const {
 
 router.get("/", getAllComments);
 router.put("/:id", updateComment);
+router.get("/:postid", getCommentsByPostId);
 router.post("/", createComment);
 router.delete("/:id", deleteComment);
 

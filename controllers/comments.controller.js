@@ -3,6 +3,7 @@ const {
   create_comment,
   update_comment,
   delete_comment,
+  comments_by_post_id,
 } = require("../Services/comments.services");
 const { UPDATED_DONE, DELETED_DONE } = require("../helpers/messages");
 const errors = require("../helpers/resError.helper");
@@ -57,9 +58,22 @@ const deleteComment = async (req, res) => {
     res.status(500).send(errors._500);
   }
 };
+const getCommentsByPostId = async (req, res) => {
+  try {
+    const { postid } = req.params;
+    const comments = await comments_by_post_id(postid);
+    if (comments.length === 0) {
+      return res.status(404).json(errors._400);
+    }
+    res.status(200).json(comments);
+  } catch (e) {
+    res.status(500).send(errors._500);
+  }
+};
 module.exports = {
   getAllComments,
   createComment,
   updateComment,
   deleteComment,
+  getCommentsByPostId,
 };

@@ -47,10 +47,18 @@ const check_exist_comment = async (id) => {
   }
   return true;
 };
+const comments_by_post_id = async (id) => {
+  return await Comment.findAll({
+    where: {
+      post_id: id,
+    },
+  });
+};
 
 module.exports = {
   getallcomments,
   create_comment,
   update_comment,
   delete_comment,
+  comments_by_post_id,
 };
