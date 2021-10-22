@@ -1,7 +1,8 @@
-'use strict';
+
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Organization extends Model {
     /**
@@ -9,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate(/* models */) {
       // define association here
     }
-  };
+  }
   Organization.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
@@ -20,7 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.INTEGER,
     email: DataTypes.STRING,
     welcomeText: DataTypes.TEXT,
-    aboutUsText: DataTypes.TEXT
+    aboutUsText: DataTypes.TEXT,
+    urlFace: DataTypes.STRING,
+    urlInsta: DataTypes.STRING,
+    urlLinked: DataTypes.STRING
   }, {
     sequelize,
     paranoid: true,

@@ -7,9 +7,12 @@ const PASSWORD_LENGTH = 'Password must be 6-16 characters.';
 const REGISTER_SUCCESS = 'User successfully registered.';
 const AUTH_TOKEN_ERROR = 'No authorization token was found.';
 const AUTH_TOKEN_EXPIRED = 'The authorization token has expired.';
+const AUTH_TOKEN_INVALID = 'The authorization token is invalid.';
 const INVALID_CREDENTIAL = 'The username or password is incorrect';
+const CREATED_DONE = 'Successful created';
 const DELETED_DONE = 'Successfully removed';
-const UPADATED_DONE = 'Successful update';
+const UPDATED_DONE = 'Successful update';
+const CREATE_FAIL = 'Unsuccessful created';
 const UPDATE_FAIL = 'Unsuccessful update';
 const DELETE_FAIL = 'Error while delete';
 const NOT_ADMIN = 'The user is not authorized to access this page.';
@@ -27,9 +30,12 @@ module.exports = {
 	REGISTER_SUCCESS,
 	AUTH_TOKEN_ERROR,
 	AUTH_TOKEN_EXPIRED,
+	AUTH_TOKEN_INVALID,
 	DELETED_DONE,
 	INVALID_CREDENTIAL,
-	UPADATED_DONE,
+	CREATED_DONE,
+	UPDATED_DONE,
+	CREATE_FAIL,
 	UPDATE_FAIL,
 	NOT_ADMIN,
 	DELETE_FAIL,

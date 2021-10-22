@@ -1,9 +1,9 @@
-const bcrypt = require("bcrypt");
-const sendEmail = require("../Services/welcomeEmail.services");
+const bcrypt = require('bcrypt');
+const sendEmail = require('../Services/welcomeEmail.services');
 
-const { User } = require("../models");
-const { createAccessToken } = require("./jwt.services");
-const dayjs = require("dayjs");
+const { User } = require('../models');
+const { createAccessToken } = require('./jwt.services');
+const dayjs = require('dayjs');
 
 const register = ({ firstName, lastName, email, photo, password }) => {
 	const newUser = {
@@ -58,7 +58,7 @@ const isRegister = async (email) => {
 };
 
 const patchUser = async (id, data) => {
-	Object.keys(data).forEach((k) => data[k] === "" && delete data[k]);
+	Object.keys(data).forEach((k) => data[k] === '' && delete data[k]);
 
 	if (data.password) {
 		data.password = bcrypt.hashSync(data.password, 10);
@@ -75,7 +75,7 @@ const patchUser = async (id, data) => {
 
 const deleteUser = async (id) => {
 	const isDeleted = await User.update(
-		{ deletedAt: dayjs().format("YYYY-MM-DD hh:mm:ss") },
+		{ deletedAt: dayjs().format('YYYY-MM-DD hh:mm:ss') },
 		{ where: { id, deletedAt: null } }
 	);
 
@@ -88,10 +88,21 @@ const deleteUser = async (id) => {
 	return true;
 };
 
+const validateUser = async (id) => {
+	const userExist = await User.findOne({ where: id });
+
+	if (!userExist) {
+		return false;
+	}
+
+	return true;
+};
+
 module.exports = {
 	register,
 	login,
 	isRegister,
 	patchUser,
 	deleteUser,
+	validateUser,
 };
