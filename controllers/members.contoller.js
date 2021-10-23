@@ -1,5 +1,7 @@
 const {
 	ADDED_DONE,
+	UPDATED_DONE,
+	UPDATE_FAIL,
 	DELETE_FAIL,
 	DELETED_DONE,
 } = require('../helpers/messages');
@@ -7,6 +9,7 @@ const {
 const {
 	addMember,
 	getMembers,
+	editMember,
 	deleteMember,
 } = require('../services/members.services');
 
@@ -33,11 +36,16 @@ const addNewMember = async (req, res) => {
 };
 
 //update member
-const updateMember = (req, res) => {
+const editMemberByID = async (req, res) => {
 	const { id } = req.params;
+	const data = req.body;
 
 	try {
-		res.send('member updated: ' + id);
+		const updatedMember = await editMember(id, data);
+		if (!updatedMember) {
+			return res.status(404).json({ ok: false, msg: UPDATE_FAIL });
+		}
+		return res.status(200).json({ ok: true, msg: UPDATED_DONE });
 	} catch (err) {
 		res.status(500).json({ ok: false, msg: err.menssage });
 	}
@@ -62,6 +70,6 @@ const deleteMemberById = async (req, res) => {
 module.exports = {
 	getAllMembers,
 	addNewMember,
-	updateMember,
+	editMemberByID,
 	deleteMemberById,
 };

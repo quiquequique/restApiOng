@@ -17,6 +17,24 @@ const getMembers = async () => {
 	}
 };
 
+const editMember = async (id, data) => {
+	try {
+		Object.keys(data).forEach((i) => data[i] === '' && delete data[i]);
+
+		const isUpdated = await Member.update(data, {
+			where: { id },
+		});
+
+		if (isUpdated[0] === 0) {
+			return false;
+		}
+
+		return true;
+	} catch (error) {
+		throw error;
+	}
+};
+
 const deleteMember = async (id) => {
 	try {
 		const isDeleted = await Member.update(
@@ -36,6 +54,7 @@ const deleteMember = async (id) => {
 
 module.exports = {
 	addMember,
+	editMember,
 	getMembers,
 	deleteMember,
 };
