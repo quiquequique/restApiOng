@@ -8,8 +8,8 @@ const getActivities = (req, res) => {
 
 const addActivity = async (req, res) => {
   try {
-    const { name, content, image } = req.body;
-    const newActivity = await createActivity({ name, content, image });
+    const data = req.body;
+    const newActivity = await createActivity(data);
 
     return res.status(201).json({ msg: CREATED_DONE, newActivity });
   } catch (error) {
