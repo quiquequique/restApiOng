@@ -55,10 +55,19 @@ const comments_by_post_id = async (id) => {
   });
 };
 
+const comments_by_id = async (id) => {
+  return await Comment.findAll({
+    where: {
+      id,
+    },
+  });
+};
+
 module.exports = {
   getallcomments,
   create_comment,
   update_comment,
   delete_comment,
   comments_by_post_id,
+  comments_by_id,
 };

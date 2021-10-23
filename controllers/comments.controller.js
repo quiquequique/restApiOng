@@ -4,8 +4,13 @@ const {
   update_comment,
   delete_comment,
   comments_by_post_id,
+  comments_by_id,
 } = require("../Services/comments.services");
-const { UPDATED_DONE, DELETED_DONE } = require("../helpers/messages");
+const {
+  UPDATED_DONE,
+  DELETED_DONE,
+  NOT_ADMIN,
+} = require("../helpers/messages");
 const errors = require("../helpers/resError.helper");
 
 const getAllComments = async (req, res) => {
@@ -37,11 +42,13 @@ const updateComment = async (req, res) => {
   try {
     const { id } = req.params;
     const data = req.body;
-    const resp = await update_comment(data, id);
-    if (!resp) {
-      return res.status(404).json(errors._404);
+    const comment = await comments_by_id(id);
+    if (req.user.id === comment[0].user_id || req.user.roleId === 1) {
+      await update_comment(data, id);
+      res.status(200).json(UPDATED_DONE);
+    } else {
+      res.status(500).send(NOT_ADMIN);
     }
-    res.status(200).json(UPDATED_DONE);
   } catch (e) {
     res.status(500).send(errors._500);
   }
@@ -49,11 +56,16 @@ const updateComment = async (req, res) => {
 const deleteComment = async (req, res) => {
   try {
     const { id } = req.params;
-    const commentdeleted = await delete_comment(id);
-    if (!commentdeleted) {
-      return res.status(404).json(errors._404);
+    const comments = await comments_by_id(id);
+    if (req.user.id === comments[0].user_id || req.user.roleId === 1) {
+      const commentdeleted = await delete_comment(id);
+      if (!commentdeleted) {
+        return res.status(404).json(errors._404);
+      }
+      res.status(200).json(DELETED_DONE);
+    } else {
+      res.status(500).send(NOT_ADMIN);
     }
-    res.status(200).json(DELETED_DONE);
   } catch (e) {
     res.status(500).send(errors._500);
   }

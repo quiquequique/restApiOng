@@ -8,11 +8,13 @@ const {
   createComment,
   deleteComment,
 } = require("../controllers/comments.controller");
+const { isAdmin } = require("../middlewares/isAdmin");
+const { isAuthenticated } = require("../middlewares/isAuthenticated");
 
-router.get("/", getAllComments);
-router.put("/:id", updateComment);
+router.get("/", isAdmin, getAllComments);
+router.put("/:id", isAuthenticated, updateComment);
 router.get("/:postid", getCommentsByPostId);
 router.post("/", createComment);
-router.delete("/:id", deleteComment);
+router.delete("/:id", isAuthenticated, deleteComment);
 
 module.exports = router;
