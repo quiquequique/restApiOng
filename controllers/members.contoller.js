@@ -1,68 +1,75 @@
-/* eslint-disable spaced-comment */
+const {
+	ADDED_DONE,
+	UPDATED_DONE,
+	UPDATE_FAIL,
+	DELETE_FAIL,
+	DELETED_DONE,
+} = require('../helpers/messages');
+
+const {
+	addMember,
+	getMembers,
+	editMember,
+	deleteMember,
+} = require('../services/members.services');
+
 //get all members
-const errors = require('../helpers/resError.helper');
-
-const getAllMembers = (_, res) => {
-  try {
-    res.send('list of all members');
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
-};
-
-//get a single member
-const getMemberById = (req, res) => {
-  const { id } = req.params;
-
-  try {
-    res.send('member by id:' + id);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+const getAllMembers = async (req, res) => {
+	try {
+		const members = await getMembers();
+		return res.status(200).json({ members });
+	} catch (err) {
+		res.status(500).json({ ok: false, msg: err.message });
+	}
 };
 
 //create member
-const createMember = (req, res) => {
-  const { newMember } = req.body;
+const addNewMember = async (req, res) => {
+	const data = req.body;
 
-  try {
-    res.send('new member created: ' + newMember);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		const newMember = await addMember(data);
+		return res.status(201).json({ msg: ADDED_DONE, newMember });
+	} catch (err) {
+		res.status(500).json({ ok: false, msg: err.menssage });
+	}
 };
 
 //update member
-const updateMember = (req, res) => {
-  const { id } = req.params;
+const editMemberByID = async (req, res) => {
+	const { id } = req.params;
+	const data = req.body;
 
-  try {
-    res.send('member updated: ' + id);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		const updatedMember = await editMember(id, data);
+		if (!updatedMember) {
+			return res.status(404).json({ ok: false, msg: UPDATE_FAIL });
+		}
+		return res.status(200).json({ ok: true, msg: UPDATED_DONE });
+	} catch (err) {
+		res.status(500).json({ ok: false, msg: err.menssage });
+	}
 };
 
 //delete member
-const deleteMember = (req, res) => {
-  const { id } = req.params;
+const deleteMemberById = async (req, res) => {
+	const { id } = req.params;
 
-  try {
-    res.send('member deleted: ' + id);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
-  }
+	try {
+		const isDeleted = await deleteMember(id);
+		if (!isDeleted) {
+			return res.status(404).json({ ok: false, msg: DELETE_FAIL });
+		}
+
+		return res.status(200).json({ ok: true, msg: DELETED_DONE });
+	} catch (err) {
+		res.status(500).json({ ok: false, msg: err.menssage });
+	}
 };
 
 module.exports = {
-  getAllMembers,
-  getMemberById,
-  createMember,
-  updateMember,
-  deleteMember
+	getAllMembers,
+	addNewMember,
+	editMemberByID,
+	deleteMemberById,
 };
