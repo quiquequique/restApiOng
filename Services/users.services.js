@@ -49,53 +49,67 @@ const login = async ({ email, password }) => {
 };
 
 const isRegister = async (email) => {
-	const exist = await User.findOne({ where: { email } });
+	try {
+		const exist = await User.findOne({ where: { email } });
 
-	if (!exist) {
-		return false;
+		if (!exist) {
+			return false;
+		}
+		return true;
+	} catch (error) {
+		throw error;
 	}
-	return true;
 };
 
 const patchUser = async (id, data) => {
-	Object.keys(data).forEach((k) => data[k] === '' && delete data[k]);
+	try {
+		Object.keys(data).forEach((i) => data[i] === '' && delete data[i]);
 
-	if (data.password) {
-		data.password = bcrypt.hashSync(data.password, 10);
+		if (data.password) {
+			data.password = bcrypt.hashSync(data.password, 10);
+		}
+
+		const isUpdated = await User.update(data, { where: { id } });
+
+		if (isUpdated[0] === 0) {
+			return false;
+		}
+
+		return true;
+	} catch (error) {
+		throw error;
 	}
-
-	const isUpdated = await User.update(data, { where: { id } });
-
-	if (isUpdated[0] === 0) {
-		return false;
-	}
-
-	return true;
 };
 
 const deleteUser = async (id) => {
-	const isDeleted = await User.update(
-		{ deletedAt: dayjs().format('YYYY-MM-DD hh:mm:ss') },
-		{ where: { id, deletedAt: null } }
-	);
+	try {
+		const isDeleted = await User.update(
+			{ deletedAt: dayjs().format('YYYY-MM-DD hh:mm:ss') },
+			{ where: { id, deletedAt: null } }
+		);
 
-	console.log(isDeleted);
+		if (isDeleted[0] === 0) {
+			return false;
+		}
 
-	if (isDeleted[0] === 0) {
-		return false;
+		return true;
+	} catch (error) {
+		throw error;
 	}
-
-	return true;
 };
 
 const validateUser = async (id) => {
-	const userExist = await User.findOne({ where: id });
+	try {
+		const userExist = await User.findOne({ where: id });
 
-	if (!userExist) {
-		return false;
+		if (!userExist) {
+			return false;
+		}
+
+		return true;
+	} catch (error) {
+		throw error;
 	}
-
-	return true;
 };
 
 module.exports = {

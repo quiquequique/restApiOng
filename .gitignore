@@ -2,7 +2,7 @@
 .env
 package-lock.json
 .package-lock.json
-yarn.lock
+.yarn.lock
 api.rest
 request.http
 .eslintrc.json
