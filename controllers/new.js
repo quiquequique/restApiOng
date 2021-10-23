@@ -5,7 +5,7 @@ const {
   deleteNews,
   getallnews,
 } = require("../services/new");
-const { DELETED_DONE, UPADATED_DONE } = require("../helpers/messages");
+const { DELETED_DONE, UPDATED_DONE } = require("../helpers/messages");
 
 const errors = require("../helpers/resError.helper");
 
@@ -49,10 +49,11 @@ const updateNews = async (req, res) => {
     const { id } = req.params;
     const data = req.body;
     const newUpdate = await updateNew(data, id);
+    console.log("new", newUpdate);
     if (!newUpdate) {
       return res.status(404).json(errors._404);
     }
-    res.status(200).json(UPADATED_DONE);
+    res.status(200).json(UPDATED_DONE);
   } catch (e) {
     res.status(500).send(errors._500);
   }

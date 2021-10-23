@@ -1,29 +1,52 @@
+const { createActivity, update } = require('../services/activities.services');
+
+const {
+  CREATED_DONE,
+  CREATE_FAIL,
+  UPDATED_DONE,
+  UPDATE_FAIL
+} = require('../helpers/messages');
+
 const getActivities = (req, res) => {
-	res.send("Get all Activities");
+  res.send('Get all Activities');
 };
 
-const addActivity = (req, res) => {
-	const data = req.body;
+const addActivity = async (req, res) => {
+  try {
+    const { name, content, image } = req.body;
+    const newActivity = await createActivity({ name, content, image });
 
-	res.json({ msg: "Add new activity", data });
+    return res.status(201).json({ msg: CREATED_DONE, newActivity });
+  } catch (error) {
+    return res.status(500).json({ error: CREATE_FAIL });
+  }
 };
 
-const editActivity = (req, res) => {
-	const { id } = req.params;
-	const data = req.body;
+const updateActivity = async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+  try {
+    const updatedActivity = await update(data, id);
 
-	res.json({ msg: `Edit activity with ID = ${id}`, data });
+    if (!updatedActivity) {
+      return res.status(404).json({ msg: UPDATE_FAIL });
+    }
+
+    return res.status(200).json({ msg: UPDATED_DONE });
+  } catch (error) {
+    return res.status(500).json({ error: UPDATE_FAIL });
+  }
 };
 
 const deleteActivity = (req, res) => {
-	const { id } = req.params;
+  const { id } = req.params;
 
-	res.send(`Delete activity with ID = ${id}`);
+  res.send(`Delete activity with ID = ${id}`);
 };
 
 module.exports = {
-	getActivities,
-	addActivity,
-	editActivity,
-	deleteActivity,
+  getActivities,
+  addActivity,
+  updateActivity,
+  deleteActivity
 };

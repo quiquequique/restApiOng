@@ -12,7 +12,7 @@ router.get("/:id",[isAdmin], slidesController.getSlideById);
 //get by nombre
 //router.get("/:name", slidesController.findByName);
 //patch by id
-//router.get("/:id", slidesController.update);
+router.put("/:id", slidesController.updateSlide);
 //delete by id
 router.delete("/:id",[isAdmin], slidesController.deleteSlide);
 

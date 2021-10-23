@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const secretKey = process.env.SECRET_TOKEN_KEY;
 
@@ -14,11 +14,11 @@ const createAccessToken = (data) => {
 		roleId,
 	};
 
-	return jwt.sign(payload, secretKey, { expiresIn: "12h" });
+	return jwt.sign(payload, secretKey, { expiresIn: '12h' });
 };
 
 const decodeToken = (token) => {
-	return jwt.decode(token, secretKey);
+	return jwt.verify(token, secretKey);
 };
 
 module.exports = {

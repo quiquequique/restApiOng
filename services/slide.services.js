@@ -38,9 +38,21 @@ const SlideDelete = async (id) => {
   }
 };
 
+const putSlide = async (body,id) => {
+  console.log(body,id)
+  const exist = await SlideExist(id); 
+  if(exist){
+    return await Slide.update(body,{ where:{
+      id,
+    }})
+  }
+  return false; 
+}
+
 module.exports = {
   SlideExist,
   getAllSlide,
   getSlide,
-  SlideDelete
+  SlideDelete,
+  putSlide
 };
