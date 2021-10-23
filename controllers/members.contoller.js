@@ -2,16 +2,24 @@ const {
 	ADDED_DONE,
 	UPDATED_DONE,
 	UPDATE_FAIL,
+	DELETE_FAIL,
+	DELETED_DONE,
 } = require('../helpers/messages');
-const { addMember, editMember } = require('../services/members.services');
+
+const {
+	addMember,
+	getMembers,
+	editMember,
+	deleteMember,
+} = require('../services/members.services');
 
 //get all members
-const getAllMembers = (_, res) => {
+const getAllMembers = async (req, res) => {
 	try {
-		res.send('list of all members');
+		const members = await getMembers();
+		return res.status(200).json({ members });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.message });
 	}
 };
 
@@ -23,8 +31,7 @@ const addNewMember = async (req, res) => {
 		const newMember = await addMember(data);
 		return res.status(201).json({ msg: ADDED_DONE, newMember });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.menssage });
 	}
 };
 
@@ -40,20 +47,23 @@ const editMemberByID = async (req, res) => {
 		}
 		return res.status(200).json({ ok: true, msg: UPDATED_DONE });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.menssage });
 	}
 };
 
 //delete member
-const deleteMember = (req, res) => {
+const deleteMemberById = async (req, res) => {
 	const { id } = req.params;
 
 	try {
-		res.send('member deleted: ' + id);
+		const isDeleted = await deleteMember(id);
+		if (!isDeleted) {
+			return res.status(404).json({ ok: false, msg: DELETE_FAIL });
+		}
+
+		return res.status(200).json({ ok: true, msg: DELETED_DONE });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.menssage });
 	}
 };
 
@@ -61,5 +71,5 @@ module.exports = {
 	getAllMembers,
 	addNewMember,
 	editMemberByID,
-	deleteMember,
+	deleteMemberById,
 };

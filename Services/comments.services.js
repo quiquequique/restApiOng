@@ -5,7 +5,6 @@ const getallcomments = async () => {
     attributes: ["body"],
     order: [["createdAt", "DESC"]],
   });
-  console.log(comments);
   return comments;
 };
 
@@ -19,7 +18,27 @@ const create_comment = async (body) => {
   }
   return false;
 };
+const update_comment = async (body, id) => {
+  const exist = await check_exist_comment(id);
+  if (exist) {
+    const resp = await Comment.update(body, {
+      where: {
+        id,
+      },
+    });
+    return resp;
+  }
+  return false;
+};
+const check_exist_comment = async (id) => {
+  const exist = await Comment.findByPk(id);
+  if (!exist) {
+    return false;
+  }
+  return true;
+};
 module.exports = {
   getallcomments,
   create_comment,
+  update_comment,
 };
