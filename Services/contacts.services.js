@@ -1,10 +1,12 @@
 const { Contact } = require('../models');
+const sendEmail = require('../Services/welcomeEmail.services');
 
 // eslint-disable-next-line consistent-return
 const createContact = async (body) => {
   try {
     const created = await Contact.create(body);
     if (created) {
+      sendEmail(body.firstName, body.lastName, body.email, 'newContact');
       return { meta: { msg: { created: true } } };
     }
   } catch (error) {

@@ -19,7 +19,7 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 		if (!createdUser) {
 			return null;
 		}
-		sendEmail(firstName, lastName, email);
+		sendEmail(firstName, lastName, email, 'registerEmail');
 		return createdUser;
 	} catch (error) {
 		throw error;

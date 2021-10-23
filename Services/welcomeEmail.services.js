@@ -4,10 +4,10 @@
 
 const { EmailData } = require('../helpers/email2.helpers');
 
-const sendEmail = (firstName, lastName, email) => {
+const sendEmail = (firstName, lastName, email, key) => {
   // eslint-disable-next-line global-require
   const sgMail = require('@sendgrid/mail');
-  const emailBody = new EmailData(firstName, lastName);
+  const emailBody = new EmailData(firstName, lastName, email, key);
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {
     to: email,
@@ -18,7 +18,7 @@ const sendEmail = (firstName, lastName, email) => {
   sgMail
     .send(msg)
     .then(() => {
-      console.log('Email sent');
+      console.log('Email sent'); // out for logger
     })
     .catch((error) => {
       console.error(error);
