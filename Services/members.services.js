@@ -1,3 +1,4 @@
+const dayjs = require('dayjs');
 const { Member } = require('../models');
 
 const addMember = (data) => {
@@ -16,7 +17,25 @@ const getMembers = async () => {
 	}
 };
 
+const deleteMember = async (id) => {
+	try {
+		const isDeleted = await Member.update(
+			{ deletedAt: dayjs().format('YYYY-MM-DD hh:mm:ss') },
+			{ where: { id, deletedAt: null } }
+		);
+
+		if (isDeleted[0] === 0) {
+			return false;
+		}
+
+		return true;
+	} catch (error) {
+		throw error;
+	}
+};
+
 module.exports = {
 	addMember,
 	getMembers,
+	deleteMember,
 };
