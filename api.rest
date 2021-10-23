@@ -117,7 +117,7 @@ DELETE  http://localhost:3000/slides/1
 GET http://localhost:3000/slides/
 
 ### UPDATE SLIDE by ID 
-PUT http://localhost:3000/slides/5555
+PUT http://localhost:3000/slides/555
 Content-Type: application/json
 
 {
@@ -127,6 +127,9 @@ Content-Type: application/json
 	"organizationId" : 3
 }
 
+
+### GET SLIDES BY ID_ORG 
+GET http://localhost:3000/slides/organization/3
 
 ### CREATE ACTIVITY 
 

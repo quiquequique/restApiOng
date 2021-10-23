@@ -38,5 +38,6 @@ const updateOrganization = async (body, orgId) => {
 
 module.exports = {
   getOrganization,
-  updateOrganization
+  updateOrganization,
+  checkIfExistOrg
 };
