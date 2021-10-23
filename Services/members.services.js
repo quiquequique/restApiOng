@@ -9,6 +9,14 @@ const addMember = (data) => {
 	}
 };
 
+const getMembers = async () => {
+	try {
+		return await Member.findAll();
+	} catch (error) {
+		throw error;
+	}
+};
+
 const deleteMember = async (id) => {
 	try {
 		const isDeleted = await Member.update(
@@ -28,5 +36,6 @@ const deleteMember = async (id) => {
 
 module.exports = {
 	addMember,
+	getMembers,
 	deleteMember,
 };

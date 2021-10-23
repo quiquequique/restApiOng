@@ -3,15 +3,20 @@ const {
 	DELETE_FAIL,
 	DELETED_DONE,
 } = require('../helpers/messages');
-const { addMember, deleteMember } = require('../services/members.services');
+
+const {
+	addMember,
+	getMembers,
+	deleteMember,
+} = require('../services/members.services');
 
 //get all members
-const getAllMembers = (_, res) => {
+const getAllMembers = async (req, res) => {
 	try {
-		res.send('list of all members');
+		const members = await getMembers();
+		return res.status(200).json({ members });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.message });
 	}
 };
 
@@ -23,8 +28,7 @@ const addNewMember = async (req, res) => {
 		const newMember = await addMember(data);
 		return res.status(201).json({ msg: ADDED_DONE, newMember });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.menssage });
 	}
 };
 
@@ -35,8 +39,7 @@ const updateMember = (req, res) => {
 	try {
 		res.send('member updated: ' + id);
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.menssage });
 	}
 };
 
@@ -52,8 +55,7 @@ const deleteMemberById = async (req, res) => {
 
 		return res.status(200).json({ ok: true, msg: DELETED_DONE });
 	} catch (err) {
-		console.error(err);
-		res.status(500).json(errors._500);
+		res.status(500).json({ ok: false, msg: err.menssage });
 	}
 };
 
