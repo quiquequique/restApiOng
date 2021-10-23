@@ -1,6 +1,8 @@
 const { Activities } = require('../models');
 
 const createActivity = ({ name, content, image }) => {
+ 
+ 
   const newActivity = {
     name,
     content,
