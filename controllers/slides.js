@@ -84,16 +84,11 @@ const deleteSlide = async (req, res) => {
 
 const slidesByOrg = async (req, res) => {
   const idOrganization = req.params.id; 
-  res.json(idOrganization);
-}
-
-/*
   try {
     const organizationSlide = await getSlidesByOrg(idOrganization); 
-    
-    console.log(organizationSlide)
+
     if (organizationSlide) {
-      res.status(200).json({organizationSlide });
+      res.status(200).json(organizationSlide);
     } else {
       res.status(404).json(errors._404);
     }
@@ -102,6 +97,10 @@ const slidesByOrg = async (req, res) => {
 
     res.status(500).json(errors._500);
   }
+}
+
+/*
+
 
 */ 
 module.exports = {

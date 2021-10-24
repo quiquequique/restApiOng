@@ -116,8 +116,11 @@ DELETE  http://localhost:3000/slides/1
 ### GET SLIDES 
 GET http://localhost:3000/slides/
 
+### CREATE SLIDE 
+POST 
+
 ### UPDATE SLIDE by ID 
-PUT http://localhost:3000/slides/555
+PUT http://localhost:3000/slides/3
 Content-Type: application/json
 
 {
