@@ -13,4 +13,21 @@ const createContact = async (body) => {
     return null;
   }
 };
-module.exports = { createContact };
+
+const getAllContacts = async () => {
+  const data = await Contact.findAll();
+  let contacts = null;
+
+  if (data[0] !== undefined) {
+    contacts = { meta: {
+      status: '200',
+      link: '/organization/public',
+      count: data.length
+    },
+    data
+    };
+  }
+
+  return contacts;
+};
+module.exports = { createContact, getAllContacts };
