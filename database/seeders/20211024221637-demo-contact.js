@@ -2,9 +2,9 @@
 
 module.exports = {
   up: async (queryInterface /* , Sequelize */) => {
-    return queryInterface.bulkInsert('Contact', [{
+    return queryInterface.bulkInsert('Contacts', [{
       firstName: 'John',
-      lasttName: 'Doe',
+      lastName: 'Doe',
       phone: 455455,
       email: 'email@email.com',
       message: 'mensaje tipo de usuario contacto ong',
@@ -13,7 +13,7 @@ module.exports = {
     },
     {
       firstName: 'Pepe',
-      lasttName: 'Pepa',
+      lastName: 'Pepa',
       phone: 455999,
       email: 'email@email.com',
       message: 'mensaje tipo de usuario contacto ong',
@@ -23,6 +23,6 @@ module.exports = {
   },
 
   down: async (queryInterface /* , Sequelize */) => {
-    return queryInterface.bulkDelete('Contact', null, {});
+    return queryInterface.bulkDelete('Contacts', null, {});
   }
 };
