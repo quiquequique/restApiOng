@@ -1,6 +1,9 @@
 const { Slide } = require('../models');
 const errors = require('../helpers/resError.helper');
-
+const {
+  checkIfExistOrg
+} = require('../Services/dbOrganization.services'); 
+const { Organization } = require('../models');
 const SlideExist = async (id) => {
   const exist = await Slide.findByPk(id);
 
@@ -14,6 +17,27 @@ const getAllSlide = async () => {
   });
   return allCategories;
 };
+
+const getSlidesByOrg = async (id) => {
+
+  const allSlides = await Slide.findAll({
+    where: {
+      organizationId: id
+    }
+  });
+
+  try {
+    if(Object.keys(allSlides).length !== 0){
+      return allSlides; 
+    }else{
+      return false; 
+    }
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json(errors._500);
+  }
+}
 
 const getSlide = async (id) => {
   const slide = await Slide.findByPk(id);
@@ -39,7 +63,6 @@ const SlideDelete = async (id) => {
 };
 
 const putSlide = async (body,id) => {
-  console.log(body,id)
   const exist = await SlideExist(id); 
   if(exist){
     return await Slide.update(body,{ where:{
@@ -54,5 +77,6 @@ module.exports = {
   getAllSlide,
   getSlide,
   SlideDelete,
-  putSlide
+  putSlide,
+  getSlidesByOrg
 };
