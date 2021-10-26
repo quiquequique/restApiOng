@@ -6,8 +6,8 @@ const organizationController = require('../controllers/organization.controller')
 
 const { organizationValidator } = require('../middlewares/organization.validator');
 
-const { isAdmin } = require('../middlewares/isAdmin');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAdmin } = require('../middlewares/isAdmin');
 
 /* GET users listing. */
 router.get('/public', organizationController.getOne);

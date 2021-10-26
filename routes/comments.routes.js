@@ -1,4 +1,5 @@
-const { Router } = require("express");
+const { Router } = require('express');
+
 const router = Router();
 
 const {
@@ -7,14 +8,14 @@ const {
   updateComment,
   createComment,
   deleteComment,
-} = require("../controllers/comments.controller");
-const { isAdmin } = require("../middlewares/isAdmin");
-const { isAuthenticated } = require("../middlewares/isAuthenticated");
+} = require('../controllers/comments.controller');
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAdmin } = require('../middlewares/isAdmin');
 
-router.get("/", isAdmin, getAllComments);
-router.put("/:id", isAuthenticated, updateComment);
-router.get("/:postid", getCommentsByPostId);
-router.post("/", createComment);
-router.delete("/:id", isAuthenticated, deleteComment);
+router.get('/', [isAuthenticated, isAdmin], getAllComments);
+router.put('/:id', [isAuthenticated, isAdmin], updateComment);
+router.get('/:postid', [isAuthenticated, isAdmin], getCommentsByPostId);
+router.post('/', createComment);
+router.delete('/:id', [isAuthenticated, isAdmin], deleteComment);
 
 module.exports = router;
