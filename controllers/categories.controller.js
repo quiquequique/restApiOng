@@ -1,7 +1,10 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-console */
 const {
   getAllCategory,
   getCategory,
-  categoryDelete
+  categoryDelete,
+  createCategory
 } = require('../Services/dbCategories.services');
 const errors = require('../helpers/resError.helper');
 
@@ -29,14 +32,16 @@ const getCategoryById = async (req, res) => {
   }
 };
 // create category
-const createCategory = (req, res) => {
-  const { newCategory } = req.body;
-
+const newCategory = (req, res) => {
+  const newCat = req.body;
   try {
-    res.send('new category created: ' + newCategory);
+    createCategory(newCat);
+    return res.status(201).json({
+      meta: { created: true }
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
+    console.error(err); // prep for logger
+    return res.status(500).json(errors._500);
   }
 };
 
@@ -45,7 +50,7 @@ const updateCategory = (req, res) => {
   const { id } = req.params;
 
   try {
-    res.send('category updated: ' + id);
+    res.send('category updated: ');
   } catch (err) {
     console.error(err);
     res.status(500).json(errors._500);
@@ -74,7 +79,7 @@ const deleteCategory = async (req, res) => {
 module.exports = {
   getAllCategories,
   getCategoryById,
-  createCategory,
+  newCategory,
   updateCategory,
   deleteCategory
 };
