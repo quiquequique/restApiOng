@@ -19,8 +19,11 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 		if (!createdUser) {
 			return null;
 		}
+		/* added by quique */
 		sendEmail(firstName, lastName, email, 'registerEmail');
-		return createdUser;
+		return createAccessToken(createdUser);
+		/* end added by quique */
+
 	} catch (error) {
 		throw error;
 	}

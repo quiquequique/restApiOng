@@ -10,10 +10,13 @@ const {
   deleteCategory
 } = require('../controllers/categories.controller');
 
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAdmin } = require('../middlewares/isAdmin');
+
 router.get('/', getAllCategories);
 router.get('/:id', getCategoryById);
-router.post('/', createCategory);
-router.put('/:id', updateCategory);
-router.delete('/:id', deleteCategory);
+router.post('/', [isAuthenticated, isAdmin], createCategory);
+router.put('/:id', [isAuthenticated, isAdmin], updateCategory);
+router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
 
 module.exports = router;

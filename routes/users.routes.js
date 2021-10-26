@@ -9,6 +9,8 @@ const {
 	registerValidator,
 	loginValidator,
 } = require("../middlewares/user.validator");
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAdmin } = require('../middlewares/isAdmin');
 
 const router = Router();
 
@@ -16,8 +18,8 @@ const router = Router();
 router.post("/auth/register", [registerValidator], addUser);
 router.post("/auth/login", [loginValidator], loginUser);
 
-router.patch("/:id", updateUser);
-router.delete("/:id", disableUser);
+router.patch("/:id", [isAuthenticated, isAdmin], updateUser);
+router.delete("/:id", [isAuthenticated, isAdmin], disableUser);
 
 // router.get('/', getUsers);
 // router.get('/:id', getUserByID);
