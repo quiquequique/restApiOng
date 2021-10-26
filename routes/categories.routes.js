@@ -1,11 +1,12 @@
 const express = require('express');
+const { categoryValidator } = require('../middlewares/category.validator');
 
 const router = express.Router();
 
 const {
   getAllCategories,
   getCategoryById,
-  createCategory,
+  newCategory,
   updateCategory,
   deleteCategory
 } = require('../controllers/categories.controller');
@@ -15,7 +16,7 @@ const { isAdmin } = require('../middlewares/isAdmin');
 
 router.get('/', getAllCategories);
 router.get('/:id', getCategoryById);
-router.post('/', [isAuthenticated, isAdmin], createCategory);
+router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
 router.put('/:id', [isAuthenticated, isAdmin], updateCategory);
 router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
 

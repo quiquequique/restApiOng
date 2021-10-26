@@ -1,5 +1,5 @@
 const { Category } = require('../models');
-const errors = require('../helpers/resError.helper');
+// const errors = require('../helpers/resError.helper');
 
 const categoryExist = async (id) => {
   const exist = await Category.findByPk(id);
@@ -28,13 +28,23 @@ const categoryDelete = async (id) => {
       const categoryDestroy = await Category.destroy({ where: { id } });
 
       return categoryDestroy;
-    } else {
-      return (this.categoryDestroy = 0);
     }
+    this.categoryDestroy = 0;
+    return this.categoryDestroy;
   } catch (error) {
-    console.log(error);
+    // eslint-disable-next-line no-console
+    console.log(error.message);
 
-    res.status(500).json(errors._500);
+    throw error;
+  }
+};
+
+const createCategory = async (newCategory) => {
+  try {
+    const categoryCreated = await Category.create(newCategory);
+    return categoryCreated;
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -42,5 +52,6 @@ module.exports = {
   categoryExist,
   getAllCategory,
   getCategory,
-  categoryDelete
+  categoryDelete,
+  createCategory
 };
