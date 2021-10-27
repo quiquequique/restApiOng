@@ -1,8 +1,11 @@
 const {
   create_testimony,
+  delete_testimony,
   update_testimony,
 } = require("../Services/testimony.services");
 const errors = require("../helpers/resError.helper");
+const { DELETED_DONE } = require("../helpers/messages");
+
 const createTestimony = async (req, res) => {
   try {
     const data = req.body;
@@ -28,7 +31,20 @@ const updateTestimony = async (req, res) => {
     res.status(500).send(errors._500);
   }
 };
+const deleteTestimony = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const testimonydelete = await delete_testimony(id);
+    if (!testimonydelete) {
+      return res.status(404).json(errors._404);
+    }
+    res.status(200).json(DELETED_DONE);
+  } catch (e) {
+    res.status(500).send(errors._500);
+  }
+};
 module.exports = {
   createTestimony,
   updateTestimony,
+  deleteTestimony,
 };

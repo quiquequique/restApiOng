@@ -46,12 +46,10 @@ const checkExistNew = async (id) => {
 };
 const deleteNews = async (id) => {
   const exist = await checkExistNew(id);
-  console.log(exist);
   if (exist) {
     const resp = await New.destroy({
       where: { id },
     });
-    console.log(resp);
     return resp;
   }
   return false;
