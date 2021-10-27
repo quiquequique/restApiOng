@@ -4,8 +4,7 @@ const { Category } = require('../models');
 const categoryExist = async (id) => {
   const exist = await Category.findByPk(id);
 
-  // eslint-disable-next-line no-unneeded-ternary
-  return exist ? true : false;
+  return !!exist;
 };
 
 const getAllCategory = async () => {
@@ -48,10 +47,25 @@ const createCategory = async (newCategory) => {
   }
 };
 
+const updateCategory = async (id, data) => {
+  try {
+    const exist = await categoryExist(id);
+    if (exist) {
+      const updated = await Category.update(data, { where: { id } });
+      console.log(updated);
+      return updated;
+    }
+    return exist;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   categoryExist,
   getAllCategory,
   getCategory,
   categoryDelete,
-  createCategory
+  createCategory,
+  updateCategory
 };

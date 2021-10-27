@@ -7,36 +7,36 @@ const {
   getAllCategories,
   getCategoryById,
   newCategory,
-  updateCategory,
+  categoryUpdate,
   deleteCategory
 } = require('../controllers/categories.controller');
-/** 
- * @swagger 
- * components: 
- *  schemas: 
- *    Categories: 
- *      type: object 
- *      required: 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Categories:
+ *      type: object
+ *      required:
  *        - name
- *        - description 
+ *        - description
  *        - image
  *      properties:
  *        id:
- *          type: string 
- *          description: a number that is unique for the category 
- *        name: 
+ *          type: string
+ *          description: a number that is unique for the category
+ *        name:
  *          type: string
  *          description: name of the categorie
- *        description: 
- *          type: string 
- *          description: description of the categorie  
- *        image: 
- *          type: string 
- *          description: image of the categorie 
- *      example: 
+ *        description:
+ *          type: string
+ *          description: description of the categorie
+ *        image:
+ *          type: string
+ *          description: image of the categorie
+ *      example:
  *        id: "1"
- *        name: "polirubro" 
- *        description: "una ong polirubro" 
+ *        name: "polirubro"
+ *        description: "una ong polirubro"
  *        image: "www.fotolog.com/image/1"
  * */
 
@@ -46,7 +46,7 @@ const { isAdmin } = require('../middlewares/isAdmin');
 router.get('/', getAllCategories);
 router.get('/:id', getCategoryById);
 router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
-router.put('/:id', [isAuthenticated, isAdmin], updateCategory);
+router.patch('/:id', [isAuthenticated, isAdmin], categoryUpdate);
 router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
 
 module.exports = router;
