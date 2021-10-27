@@ -53,7 +53,7 @@ router.post("/", CreateNews);
 router.get("/", getAllNews);
 router.delete("/:id", isAdmin, DeleteNews);
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
-const { isAdmin } = require('../middlewares/isAdmin');
+// const { isAdmin } = require('../middlewares/isAdmin');
 
 router.put('/:id', [isAuthenticated, isAdmin], updateNews);
 router.get('/:id', getNewsById);
