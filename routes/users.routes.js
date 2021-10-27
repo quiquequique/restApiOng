@@ -1,27 +1,28 @@
-var { Router } = require("express");
+var { Router } = require('express');
 const {
-	addUser,
+	createUser,
 	loginUser,
-	updateUser,
-	disableUser,
-} = require("../controllers/users.controller");
+	getAllUsers,
+	updateUserByID,
+	deleteUserByID,
+} = require('../controllers/users.controller');
 const {
 	registerValidator,
 	loginValidator,
-} = require("../middlewares/user.validator");
+} = require('../middlewares/user.validator');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
 
 const router = Router();
 
 //Login and Register routes
-router.post("/auth/register", [registerValidator], addUser);
-router.post("/auth/login", [loginValidator], loginUser);
+router.post('/auth/register', [registerValidator], createUser);
+router.post('/auth/login', [loginValidator], loginUser);
 
-router.patch("/:id", [isAuthenticated, isAdmin], updateUser);
-router.delete("/:id", [isAuthenticated, isAdmin], disableUser);
+router.get('/', [isAuthenticated, isAdmin], getAllUsers);
+router.patch('/:id', [isAuthenticated, isAdmin], updateUserByID);
+router.delete('/:id', [isAuthenticated, isAdmin], deleteUserByID);
 
-// router.get('/', getUsers);
 // router.get('/:id', getUserByID);
 
 module.exports = router;
