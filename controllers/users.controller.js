@@ -76,9 +76,24 @@ const disableUser = async (req, res) => {
 	}
 };
 
+const getUserData = async (req, res) => {
+	const tokenData = req.user;
+
+	const userData = {
+		firstName: tokenData.firstName,
+		lastName: tokenData.lastName,
+		email: tokenData.email,
+		photo: tokenData.photo,
+		roleId: tokenData.roleId,
+	};
+
+	return res.status(200).json(userData);
+};
+
 module.exports = {
 	addUser,
 	loginUser,
 	updateUser,
 	disableUser,
+	getUserData,
 };
