@@ -49,7 +49,6 @@ const updateNews = async (req, res) => {
     const { id } = req.params;
     const data = req.body;
     const newUpdate = await updateNew(data, id);
-    console.log("new", newUpdate);
     if (!newUpdate) {
       return res.status(404).json(errors._404);
     }

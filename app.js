@@ -19,28 +19,29 @@ const imagesRouter = require('./routes/images.routes');
 const rolesRouter = require('./routes/roles.routes');
 const slidesRouter = require('./routes/slides.routes');
 const contactsRouter = require('./routes/contacts.routes');
+const testimonyRouter = require('./routes/testimony.routes');
 
 const app = express();
 
 const options = {
   definition: {
-    openapi: "3.0.0",
-    info:{
-      title: "ONG API",
-      version: "1.0.0",
-      description: "A simple express ONG API"
+    openapi: '3.0.0',
+    info: {
+      title: 'ONG API',
+      version: '1.0.0',
+      description: 'A simple express ONG API',
     },
-    servers:[
+    servers: [
       {
-        url: "http://localhost:3000"
-      }
-    ]
+        url: 'http://localhost:3000',
+      },
+    ],
   },
-  apis: ["./routes/*.js"]
-}
+  apis: ['./routes/*.js'],
+};
 
 const specs = swaggerJsDoc(options);
-app.use("/api-docs",swaggerUI.serve, swaggerUI.setup(specs));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(cors());
 
 // view engine setup
@@ -66,6 +67,7 @@ app.use('/roles', rolesRouter);
 app.use('/slides', slidesRouter);
 app.use('/contacts', contactsRouter);
 app.use('/backoffice/contacts', contactsRouter);
+app.use('/testimonials', testimonyRouter);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
