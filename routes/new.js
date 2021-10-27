@@ -1,11 +1,13 @@
-const { Router } = require("express");
+const { Router } = require('express');
 const {
   updateNews,
   CreateNews,
   getNewsById,
   DeleteNews,
   getAllNews,
-} = require("../controllers/new");
+} = require('../controllers/new');
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAdmin } = require('../middlewares/isAdmin');
 
 const router = Router();
 /**
@@ -46,12 +48,13 @@ const router = Router();
  *        type: "nacional"
  *        image: "www.news.com/image/1"
  * */
-const { isAuthenticated } = require("../middlewares/isAuthenticated");
-const { isAdmin } = require("../middlewares/isAdmin");
 
-router.put("/:id", [isAuthenticated, isAdmin], updateNews);
-router.get("/:id", getNewsById);
-router.post("/", [isAuthenticated, isAdmin], CreateNews);
-router.get("/", getAllNews);
-router.delete("/:id", [isAuthenticated, isAdmin], DeleteNews);
+
+router.put('/:id', [isAuthenticated, isAdmin], updateNews);
+router.get('/:id', getNewsById);
+router.post('/', [isAuthenticated, isAdmin], CreateNews);
+router.get('/', getAllNews);
+router.delete('/:id', [isAuthenticated, isAdmin], DeleteNews);
+
+
 module.exports = router;
