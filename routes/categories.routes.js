@@ -46,7 +46,7 @@ const { isAdmin } = require('../middlewares/isAdmin');
 router.get('/', getAllCategories);
 router.get('/:id', getCategoryById);
 router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
-router.patch('/:id', [isAuthenticated, isAdmin], categoryUpdate);
+router.patch('/:id', categoryValidator, [isAuthenticated, isAdmin], categoryUpdate);
 router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
 
 module.exports = router;

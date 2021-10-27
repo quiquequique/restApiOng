@@ -52,7 +52,6 @@ const categoryUpdate = async (req, res) => {
   const data = req.body;
   try {
     const updated = await updateCategory(idToUpdate, data);
-    console.log(updated);
     if (updated) {
       return res.status(200).json({ meta: { updated: true } });
     }
