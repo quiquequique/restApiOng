@@ -29,8 +29,19 @@ const check_exist_testimony = async (id) => {
   }
   return false;
 };
+const delete_testimony = async (id) => {
+  const exist = await check_exist_testimony(id);
+  if (exist) {
+    const resp = await Testimony.destroy({
+      where: { id },
+    });
+    return resp;
+  }
+  return false;
+};
 module.exports = {
   create_testimony,
   check_exist_testimony,
   update_testimony,
+  delete_testimony,
 };
