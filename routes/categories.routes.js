@@ -10,6 +10,35 @@ const {
   updateCategory,
   deleteCategory
 } = require('../controllers/categories.controller');
+/** 
+ * @swagger 
+ * components: 
+ *  schemas: 
+ *    Categories: 
+ *      type: object 
+ *      required: 
+ *        - name
+ *        - description 
+ *        - image
+ *      properties:
+ *        id:
+ *          type: string 
+ *          description: a number that is unique for the category 
+ *        name: 
+ *          type: string
+ *          description: name of the categorie
+ *        description: 
+ *          type: string 
+ *          description: description of the categorie  
+ *        image: 
+ *          type: string 
+ *          description: image of the categorie 
+ *      example: 
+ *        id: "1"
+ *        name: "polirubro" 
+ *        description: "una ong polirubro" 
+ *        image: "www.fotolog.com/image/1"
+ * */
 
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');

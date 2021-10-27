@@ -5,7 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
-
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.routes');
 const categoriesRouter = require('./routes/categories.routes');
@@ -18,8 +19,27 @@ const imagesRouter = require('./routes/images.routes');
 const rolesRouter = require('./routes/roles.routes');
 const slidesRouter = require('./routes/slides.routes');
 const contactsRouter = require('./routes/contacts.routes');
-
 const app = express();
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info:{
+      title: "ONG API",
+      version: "1.0.0",
+      description: "A simple express ONG API"
+    },
+    servers:[
+      {
+        url: "http://localhost:3000"
+      }
+    ]
+  },
+  apis: ["./routes/*.js"]
+}
+
+const specs = swaggerJsDoc(options);
+app.use("/api-docs",swaggerUI.serve, swaggerUI.setup(specs));
 app.use(cors());
 
 // view engine setup
