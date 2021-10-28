@@ -2,6 +2,7 @@ const express = require('express');
 const { categoryValidator } = require('../middlewares/category.validator');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
+
 const router = express.Router();
 
 const {
@@ -150,7 +151,7 @@ router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
  *       description: Some error happened
  */
 
-router.put('/:id', [isAuthenticated, isAdmin], updateCategory);
+router.put('/:id', [isAuthenticated, isAdmin], categoryUpdate);
 
 /**
  * @swagger

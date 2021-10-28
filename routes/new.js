@@ -10,8 +10,7 @@ const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
 
 const router = Router();
-const { isAuthenticated } = require("../middlewares/isAuthenticated");
-const { isAdmin } = require("../middlewares/isAdmin");
+
 /**
  * @swagger
  * components:
