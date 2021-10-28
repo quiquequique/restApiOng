@@ -28,6 +28,9 @@ const getAllCategory = async (page) => {
     }
     const pageFrom = 1;
     const pageTo = (Math.floor((allCategories.count / 10) + 1));
+    if ((parseInt(page, 10) > pageTo)) {
+      return null;
+    }
     const responce = {
       meta: {
         count: allCategories.count,
@@ -40,9 +43,6 @@ const getAllCategory = async (page) => {
         rows: allCategories.rows
       }
     };
-    if ((parseInt(page, 10) > pageTo)) {
-      return null;
-    }
     return responce;
   } catch (error) {
     console.log(error); // prep for logger
