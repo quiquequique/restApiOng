@@ -1,36 +1,42 @@
-"use strict";
+'use strict';
+const faker = require('faker');
+const bcrypt = require('bcrypt');
+
+let fakeUser = [
+	{
+		firstName: 'admin',
+		lastName: 'test',
+		email: 'admin@test.com',
+		password: bcrypt.hashSync('123456', 10),
+		photo: faker.image.image(),
+		roleId: 1,
+		deletedAt: null,
+		createdAt: new Date(),
+		updatedAt: new Date(),
+	},
+];
+
+for (let i = 0; i <= 20; i++) {
+	const userRole = i < 10 ? 1 : 2;
+	fakeUser.push({
+		firstName: faker.name.firstName(),
+		lastName: faker.name.lastName(),
+		email: faker.internet.email(),
+		password: bcrypt.hashSync('123456', 10),
+		photo: faker.image.image(),
+		roleId: userRole,
+		deletedAt: null,
+		createdAt: new Date(),
+		updatedAt: new Date(),
+	});
+}
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		return queryInterface.bulkInsert("Users", [
-			{
-				firstName: "John",
-				lastName: "Doe",
-				email: "example@example.com",
-				password: "123456",
-				photo:
-					"https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
-				roleId: 1,
-
-				createdAt: new Date(),
-				updatedAt: new Date(),
-			},			
-			{
-				firstName: "Sina",
-				lastName: "Doa",
-				email: "example2@example2.com",
-				password: "1234567",
-				photo:
-					"https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
-				roleId: 2,
-
-				createdAt: new Date(),
-				updatedAt: new Date(),
-			},
-		]);
+		return queryInterface.bulkInsert('Users', fakeUser, {});
 	},
 
 	down: async (queryInterface, Sequelize) => {
-		return queryInterface.bulkDelete("Users", null, {});
+		return queryInterface.bulkDelete('Users', null, {});
 	},
 };
