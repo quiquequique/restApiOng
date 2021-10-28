@@ -10,10 +10,14 @@ const {
 const errors = require('../helpers/resError.helper');
 
 // get all categories
-const getAllCategories = async (_, res) => {
+const getAllCategories = async (req, res) => {
+  const { page } = req.query;
   try {
-    const categories = await getAllCategory();
-    res.json(categories);
+    const categories = await getAllCategory(page);
+    if (categories !== null) {
+      return res.status(200).json(categories);
+    }
+    return res.status(404).json(errors._404);
   } catch (err) {
     console.error(err);
     res.status(500).json(errors._500);

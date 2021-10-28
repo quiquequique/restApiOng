@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { Category } = require('../models');
 // const errors = require('../helpers/resError.helper');
 
@@ -7,11 +8,46 @@ const categoryExist = async (id) => {
   return !!exist;
 };
 
-const getAllCategory = async () => {
-  const allCategories = await Category.findAll({
-    attributes: ['name']
-  });
-  return allCategories;
+const getAllCategory = async (page) => {
+  const siteUrl = process.env.SITE_URL;
+  const limitOf = 10;
+  const offsetOf = limitOf * (page - 1);
+  try {
+    const allCategories = await Category.findAndCountAll({
+      attributes: ['id', 'name', 'description', 'image'],
+      limit: limitOf,
+      offset: offsetOf
+    });
+    let previousUrl = null;
+    if ((parseInt(page, 10) - 1) >= 1) {
+      previousUrl = `${siteUrl}categories?page=${parseInt(page, 10) - 1}`;
+    }
+    let nextUrl = null;
+    if ((parseInt(page, 10) - 1) < (Math.floor(allCategories.count / 10))) {
+      nextUrl = `${siteUrl}categories?page=${parseInt(page, 10) + 1}`;
+    }
+    const pageFrom = 1;
+    const pageTo = (Math.floor((allCategories.count / 10) + 1));
+    if ((parseInt(page, 10) > pageTo)) {
+      return null;
+    }
+    const responce = {
+      meta: {
+        count: allCategories.count,
+        previousPage: previousUrl,
+        nextPage: nextUrl,
+        firstPage: pageFrom,
+        lastPage: pageTo
+      },
+      data: {
+        rows: allCategories.rows
+      }
+    };
+    return responce;
+  } catch (error) {
+    console.log(error); // prep for logger
+    return null;
+  }
 };
 
 const getCategory = async (id) => {
