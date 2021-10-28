@@ -4,7 +4,8 @@ const {
   getAllCategory,
   getCategory,
   categoryDelete,
-  createCategory
+  createCategory,
+  updateCategory
 } = require('../Services/dbCategories.services');
 const errors = require('../helpers/resError.helper');
 
@@ -32,10 +33,10 @@ const getCategoryById = async (req, res) => {
   }
 };
 // create category
-const newCategory = (req, res) => {
+const newCategory = async (req, res) => {
   const newCat = req.body;
   try {
-    createCategory(newCat);
+    await createCategory(newCat);
     return res.status(201).json({
       meta: { created: true }
     });
@@ -46,14 +47,18 @@ const newCategory = (req, res) => {
 };
 
 // update category
-const updateCategory = (req, res) => {
-  const { id } = req.params;
-
+const categoryUpdate = async (req, res) => {
+  const idToUpdate = req.params.id;
+  const data = req.body;
   try {
-    res.send('category updated: ');
+    const updated = await updateCategory(idToUpdate, data);
+    if (updated) {
+      return res.status(200).json({ meta: { updated: true } });
+    }
+    return res.status(404).json(errors._404);
   } catch (err) {
-    console.error(err);
-    res.status(500).json(errors._500);
+    console.error(err); // prep for logger
+    return res.status(500).json(errors._500);
   }
 };
 
@@ -80,6 +85,6 @@ module.exports = {
   getAllCategories,
   getCategoryById,
   newCategory,
-  updateCategory,
+  categoryUpdate,
   deleteCategory
 };
