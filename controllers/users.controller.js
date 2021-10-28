@@ -1,8 +1,9 @@
 const {
-	register,
+	insertUser,
 	login,
-	patchUser,
+	updateUser,
 	deleteUser,
+	selectAllUsers,
 } = require('../Services/users.services');
 
 const {
@@ -15,11 +16,11 @@ const {
 } = require('../helpers/messages');
 
 //Register new user
-const addUser = async (req, res) => {
+const createUser = async (req, res) => {
 	const data = req.body;
 
 	try {
-		const newUserToken = await register(data);
+		const newUserToken = await insertUser(data);
 
 		return res.status(201).json({ msg: REGISTER_SUCCESS, newUserToken });
 	} catch (error) {
@@ -42,13 +43,21 @@ const loginUser = async (req, res) => {
 		return res.status(500).json({ error: error.message });
 	}
 };
+const getAllUsers = async (req, res) => {
+	try {
+		const users = await selectAllUsers();
+		return res.status(200).json(users);
+	} catch (error) {
+		return res.status(500).json({ ok: false, msg: error.message });
+	}
+};
 
-const updateUser = async (req, res) => {
+const updateUserByID = async (req, res) => {
 	const { id } = req.params;
 	const data = req.body;
 
 	try {
-		const updatedUser = await patchUser(id, data);
+		const updatedUser = await updateUser(id, data);
 
 		if (!updatedUser) {
 			return res.status(404).json({ ok: false, msg: UPDATE_FAIL });
@@ -60,7 +69,7 @@ const updateUser = async (req, res) => {
 	}
 };
 
-const disableUser = async (req, res) => {
+const deleteUserByID = async (req, res) => {
 	const { id } = req.params;
 
 	try {
@@ -76,9 +85,25 @@ const disableUser = async (req, res) => {
 	}
 };
 
+const getUserData = async (req, res) => {
+	const tokenData = req.user;
+
+	const userData = {
+		firstName: tokenData.firstName,
+		lastName: tokenData.lastName,
+		email: tokenData.email,
+		photo: tokenData.photo,
+		roleId: tokenData.roleId,
+	};
+
+	return res.status(200).json(userData);
+};
+
 module.exports = {
-	addUser,
+	createUser,
 	loginUser,
-	updateUser,
-	disableUser,
+	getAllUsers,
+	updateUserByID,
+	deleteUserByID,
+	getUserData,
 };

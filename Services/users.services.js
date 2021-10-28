@@ -5,7 +5,7 @@ const { User } = require('../models');
 const { createAccessToken } = require('./jwt.services');
 const dayjs = require('dayjs');
 
-const register = ({ firstName, lastName, email, photo, password }) => {
+const insertUser = ({ firstName, lastName, email, photo, password }) => {
 	const newUser = {
 		firstName,
 		lastName,
@@ -23,7 +23,6 @@ const register = ({ firstName, lastName, email, photo, password }) => {
 		sendEmail(firstName, lastName, email, 'registerEmail');
 		return createAccessToken(createdUser);
 		/* end added by quique */
-
 	} catch (error) {
 		throw error;
 	}
@@ -63,8 +62,15 @@ const isRegister = async (email) => {
 		throw error;
 	}
 };
+const selectAllUsers = async () => {
+	try {
+		return await User.findAll();
+	} catch (error) {
+		throw error;
+	}
+};
 
-const patchUser = async (id, data) => {
+const updateUser = async (id, data) => {
 	try {
 		Object.keys(data).forEach((i) => data[i] === '' && delete data[i]);
 
@@ -116,10 +122,11 @@ const validateUser = async (id) => {
 };
 
 module.exports = {
-	register,
+	insertUser,
 	login,
 	isRegister,
-	patchUser,
+	selectAllUsers,
+	updateUser,
 	deleteUser,
 	validateUser,
 };

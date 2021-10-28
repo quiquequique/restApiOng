@@ -1,14 +1,6 @@
 const dayjs = require('dayjs');
 const { Member } = require('../models');
 
-const addMember = (data) => {
-	try {
-		return Member.create(data);
-	} catch (error) {
-		throw error;
-	}
-};
-
 const getMembers = async () => {
 	try {
 		return await Member.findAll();
@@ -17,7 +9,15 @@ const getMembers = async () => {
 	}
 };
 
-const editMember = async (id, data) => {
+const insertMember = (data) => {
+	try {
+		return Member.create(data);
+	} catch (error) {
+		throw error;
+	}
+};
+
+const updateMember = async (id, data) => {
 	try {
 		Object.keys(data).forEach((i) => data[i] === '' && delete data[i]);
 
@@ -53,8 +53,8 @@ const deleteMember = async (id) => {
 };
 
 module.exports = {
-	addMember,
-	editMember,
+	insertMember,
+	updateMember,
 	getMembers,
 	deleteMember,
 };
