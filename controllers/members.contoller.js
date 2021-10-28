@@ -7,9 +7,9 @@ const {
 } = require('../helpers/messages');
 
 const {
-	addMember,
+	insertMember,
 	getMembers,
-	editMember,
+	updateMember,
 	deleteMember,
 } = require('../services/members.services');
 
@@ -24,11 +24,11 @@ const getAllMembers = async (req, res) => {
 };
 
 //create member
-const addNewMember = async (req, res) => {
+const createMember = async (req, res) => {
 	const data = req.body;
 
 	try {
-		const newMember = await addMember(data);
+		const newMember = await insertMember(data);
 		return res.status(201).json({ msg: ADDED_DONE, newMember });
 	} catch (err) {
 		res.status(500).json({ ok: false, msg: err.menssage });
@@ -36,12 +36,12 @@ const addNewMember = async (req, res) => {
 };
 
 //update member
-const editMemberByID = async (req, res) => {
+const updateMemberByID = async (req, res) => {
 	const { id } = req.params;
 	const data = req.body;
 
 	try {
-		const updatedMember = await editMember(id, data);
+		const updatedMember = await updateMember(id, data);
 		if (!updatedMember) {
 			return res.status(404).json({ ok: false, msg: UPDATE_FAIL });
 		}
@@ -69,7 +69,7 @@ const deleteMemberById = async (req, res) => {
 
 module.exports = {
 	getAllMembers,
-	addNewMember,
-	editMemberByID,
+	createMember,
+	updateMemberByID,
 	deleteMemberById,
 };

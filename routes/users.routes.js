@@ -1,9 +1,10 @@
 var { Router } = require('express');
 const {
-	addUser,
+	createUser,
 	loginUser,
-	updateUser,
-	disableUser,
+	getAllUsers,
+	updateUserByID,
+	deleteUserByID,
 	getUserData,
 } = require('../controllers/users.controller');
 const {
@@ -16,13 +17,13 @@ const { isAdmin } = require('../middlewares/isAdmin');
 const router = Router();
 
 //Login and Register routes
-router.post('/auth/register', [registerValidator], addUser);
+router.post('/auth/register', [registerValidator], createUser);
 router.post('/auth/login', [loginValidator], loginUser);
 router.get('/auth/me', [isAuthenticated], getUserData);
 
-router.patch('/:id', [isAuthenticated, isAdmin], updateUser);
-router.delete('/:id', [isAuthenticated, isAdmin], disableUser);
-
-// router.get('/', getUsers);
+//User Endpoints
+router.get('/', [isAuthenticated, isAdmin], getAllUsers);
+router.patch('/:id', [isAuthenticated, isAdmin], updateUserByID);
+router.delete('/:id', [isAuthenticated, isAdmin], deleteUserByID);
 
 module.exports = router;
