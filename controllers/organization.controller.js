@@ -25,6 +25,9 @@ const controller = {
     try {
       const id = req.params.id;
       const bodyData = req.body;
+      console.log(bodyData.image);
+      // console.log(bodyData.urlInsta);
+      // console.log(JSON.parse(bodyData.image));
       const updateOrg = await updateOrganization(bodyData, id);
       if (updateOrg !== null) {
         return res.json(updateOrg);
