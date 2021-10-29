@@ -89,6 +89,7 @@ const getUserData = async (req, res) => {
 	const tokenData = req.user;
 
 	const userData = {
+		id: tokenData.id,
 		firstName: tokenData.firstName,
 		lastName: tokenData.lastName,
 		email: tokenData.email,

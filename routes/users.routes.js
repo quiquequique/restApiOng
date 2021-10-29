@@ -22,8 +22,8 @@ router.post('/auth/login', [loginValidator], loginUser);
 router.get('/auth/me', [isAuthenticated], getUserData);
 
 //User Endpoints
-router.get('/', [isAuthenticated, isAdmin], getAllUsers);
-router.patch('/:id', [isAuthenticated, isAdmin], updateUserByID);
-router.delete('/:id', [isAuthenticated, isAdmin], deleteUserByID);
+router.get('/', [isAuthenticated/* , isAdmin*/], getAllUsers);
+router.patch('/:id', [isAuthenticated/* , isAdmin*/], updateUserByID);
+router.delete('/:id', [isAuthenticated/* , isAdmin*/], deleteUserByID);
 
 module.exports = router;
