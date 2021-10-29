@@ -14,6 +14,9 @@ const getAllCategories = async (req, res) => {
   const { page } = req.query;
   try {
     const categories = await getAllCategory(page);
+    if (categories === 'out') {
+      return res.status(416).json(errors._416);
+    }
     if (categories !== null) {
       return res.status(200).json(categories);
     }
