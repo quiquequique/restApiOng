@@ -117,6 +117,7 @@ router.get('/:id', getCategoryById);
  *         description: Server error
  */
 router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
+
 /**
  * @swagger
  * /categories/{id}:
