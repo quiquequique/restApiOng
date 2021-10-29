@@ -17,7 +17,7 @@ exports.organizationValidator = [
     .withMessage(MIN_LENGTH_3),
   body('image')
     .trim()
-    .escape()
+    // .escape()
     .isLength({ min: 0, max: 255 })
     .withMessage(MIN_LENGTH_10),
   body('adress')
@@ -28,14 +28,14 @@ exports.organizationValidator = [
   body('phone')
     .trim()
     .escape()
-    .isNumeric()
+    .isString()
     .bail()
     .isLength({ min: 0, max: 12 })
     .withMessage(INVALID_INPUT),
   body('email')
     .trim()
     .escape()
-    .isEmail()
+    .isString()
     .bail()
     .isLength({ min: 0, max: 40 })
     .withMessage(INVALID_EMAIL),
@@ -51,17 +51,17 @@ exports.organizationValidator = [
     .withMessage(INVALID_INPUT),
   body('urlLinked')
     .trim()
-    .escape()
+    // .escape()
     .isLength({ MIN: 0, MAX: 100 })
     .withMessage(INVALID_INPUT),
   body('urlInsta')
     .trim()
-    .escape()
+    // .escape()
     .isLength({ MIN: 0, MAX: 100 })
     .withMessage(INVALID_INPUT),
   body('urlFace')
     .trim()
-    .escape()
+    // .escape()
     .isLength({ MIN: 0, MAX: 100 })
     .withMessage(INVALID_INPUT),
 
