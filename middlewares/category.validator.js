@@ -23,7 +23,6 @@ exports.categoryValidator = [
     .withMessage(INVALID_INPUT),
   body('image')
     .trim()
-    .escape()
     .isString()
     .isLength({ min: 0, max: 150 })
     .withMessage(INVALID_INPUT),

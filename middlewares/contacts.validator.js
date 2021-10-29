@@ -34,6 +34,7 @@ exports.contactsValidator = [
     .notEmpty()
     .bail()
     .isEmail()
+    .normalizeEmail()
     .bail()
     .isLength({ min: 0, max: 40 })
     .withMessage(INVALID_EMAIL),
