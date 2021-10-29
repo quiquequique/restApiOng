@@ -8,28 +8,32 @@ const categoryExist = async (id) => {
   return !!exist;
 };
 
-const getAllCategory = async (page) => {
+const getAllCategory = async (pageQuery) => {
+  const page = (parseInt(pageQuery, 10));
   const siteUrl = process.env.SITE_URL;
   const limitOf = 10;
   const offsetOf = limitOf * (page - 1);
   try {
+    if (page < 1) {
+      return 'out';
+    }
     const allCategories = await Category.findAndCountAll({
       attributes: ['id', 'name', 'description', 'image'],
       limit: limitOf,
       offset: offsetOf
     });
     let previousUrl = null;
-    if ((parseInt(page, 10) - 1) >= 1) {
-      previousUrl = `${siteUrl}categories?page=${parseInt(page, 10) - 1}`;
+    if ((page - 1) >= 1) {
+      previousUrl = `${siteUrl}categories?page=${page - 1}`;
     }
     let nextUrl = null;
-    if ((parseInt(page, 10) - 1) < (Math.floor(allCategories.count / 10))) {
-      nextUrl = `${siteUrl}categories?page=${parseInt(page, 10) + 1}`;
+    if ((page - 1) < (Math.floor(allCategories.count / 10))) {
+      nextUrl = `${siteUrl}categories?page=${page + 1}`;
     }
     const pageFrom = 1;
     const pageTo = (Math.floor((allCategories.count / 10) + 1));
-    if ((parseInt(page, 10) > pageTo)) {
-      return null;
+    if (page > pageTo) {
+      return 'out';
     }
     const responce = {
       meta: {

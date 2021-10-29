@@ -10,11 +10,11 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       address: {
         type: Sequelize.STRING,
@@ -26,11 +26,11 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       welcomeText: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true
       },
       aboutUsText: {
         type: Sequelize.TEXT,
