@@ -1,7 +1,5 @@
 const express = require('express');
-
 const router = express.Router();
-
 const {
 	createMember,
 	updateMemberByID,
@@ -9,6 +7,8 @@ const {
 	deleteMemberById,
 } = require('../controllers/members.contoller');
 const { addMemberValidator } = require('../middlewares/members.validator');
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
+const { isAdmin } = require('../middlewares/isAdmin');
 /**
  * @swagger
  * components:
@@ -48,12 +48,111 @@ const { addMemberValidator } = require('../middlewares/members.validator');
  *        image: "www.fotolog/estebanquito/1"
  *        description: "new member"
  * */
-const { isAuthenticated } = require('../middlewares/isAuthenticated');
-const { isAdmin } = require('../middlewares/isAdmin');
-
+/**
+  * @swagger
+  * tags:
+  *   name: Members
+  *   description: The Members managing API
+  */
+/**
+ * @swagger
+ * /members:
+ *   get:
+ *     summary: Returns the list of all the members
+ *     tags: [Members]
+ *     responses:
+ *       200:
+ *         description: The list of the Members
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Members'
+ */
 router.get('/', getAllMembers);
+/**
+ * @swagger
+ * /members:
+ *   post:
+ *     summary: Create a new Member
+ *     tags: [Members]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Members'
+ *     responses:
+ *       200:
+ *         description: The Member was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Members'
+ *       500:
+ *         description: Some server error
+ *       403:
+ *         description: No authorization token was found. 
+ */
 router.post('/', [isAuthenticated, isAdmin, addMemberValidator], createMember);
+/**
+ * @swagger
+ * /members/{id}:
+ *  put:
+ *    summary: Update the Member by the id
+ *    tags: [Members]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The Member id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Members'
+ *    responses:
+ *      200:
+ *        description: The Member was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Members'
+ *      404:
+ *        description: The Member was not found
+ *      500:
+ *        description: Some error happened
+ *      403:
+ *        description: No authorization token was found. 
+ */
 router.put('/:id', [isAuthenticated, isAdmin], updateMemberByID);
+/**
+ * @swagger
+ * /members/{id}:
+ *   delete:
+ *     summary: Remove the member by id
+ *     tags: [Members]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The Member id
+ * 
+ *     responses:
+ *       200:
+ *         description: The Member was deleted
+ *       403:
+ *         description: No authorization token was found.
+ *       404:
+ *         description: The Member was not found
+ */
+
 router.delete('/:id', [isAuthenticated, isAdmin], deleteMemberById);
 
 module.exports = router;

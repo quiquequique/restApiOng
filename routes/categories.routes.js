@@ -120,42 +120,6 @@ router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
 /**
  * @swagger
  * /categories/{id}:
- *  put:
- *    summary: Update the categorie by the id
- *    tags: [Categories]
- *    parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: The categorie id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/Categories'
- *    responses:
- *      200:
- *        description: The categorie was updated
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Categories'
- *      404:
- *        description: The categorie was not found
- *      403:
- *        description: No authorization token was found.
- *      500:
- *       description: Some error happened
- */
-
-router.put('/:id', [isAuthenticated, isAdmin], categoryUpdate);
-
-/**
- * @swagger
- * /categories/{id}:
  *   delete:
  *     summary: Remove the categorie by id
  *     tags: [Categories]
