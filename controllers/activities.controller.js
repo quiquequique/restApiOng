@@ -1,4 +1,8 @@
-const { createActivity, update } = require('../services/activities.services');
+const {
+  createActivity,
+  selectAllActivities,
+  update
+} = require('../services/activities.services');
 
 const {
   CREATED_DONE,
@@ -7,10 +11,14 @@ const {
   UPDATE_FAIL
 } = require('../helpers/messages');
 
-const getActivities = (req, res) => {
-  res.send('Get all Activities');
+const getAllActivities = async (req, res) => {
+  try {
+    const activities = await selectAllActivities();
+    return res.status(200).json(activities);
+  } catch (error) {
+    return res.status(500).json({ ok: false, msg: error.message });
+  }
 };
-
 const addActivity = async (req, res) => {
   try {
     const data = req.body;
@@ -45,7 +53,7 @@ const deleteActivity = (req, res) => {
 };
 
 module.exports = {
-  getActivities,
+  getAllActivities,
   addActivity,
   updateActivity,
   deleteActivity
