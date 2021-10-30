@@ -1,8 +1,14 @@
 const { Activities } = require('../models');
 
+const selectAllActivities = async () => {
+  try {
+    return await Activities.findAll();
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createActivity = ({ name, content, image }) => {
- 
- 
   const newActivity = {
     name,
     content,
@@ -35,5 +41,6 @@ const update = (data, id) => {
 
 module.exports = {
   createActivity,
+  selectAllActivities,
   update
 };
