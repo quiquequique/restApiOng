@@ -1,8 +1,9 @@
 const { New } = require("../models");
-
-const getallnews = async () => {
+const { paginado } = require("../utils/pagination");
+const getallnews = async (page) => {
   const news = await New.findAll();
-  return news;
+  const resp = paginado(page, news);
+  return resp;
 };
 const createNews = async (body) => {
   body.type = "news";

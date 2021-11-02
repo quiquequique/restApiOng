@@ -11,7 +11,8 @@ const errors = require("../helpers/resError.helper");
 
 const getAllNews = async (req, res) => {
   try {
-    const resp = await getallnews();
+    const pag = req.query.pag;
+    const resp = await getallnews(pag);
     res.send(resp);
   } catch (err) {
     res.status(500).send(errors._500);
