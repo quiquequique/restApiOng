@@ -4,7 +4,7 @@ const {
   createNews,
   deleteNews,
   getallnews,
-} = require("../services/new");
+} = require("../Services/new.services");
 const { DELETED_DONE, UPDATED_DONE } = require("../helpers/messages");
 
 const errors = require("../helpers/resError.helper");
@@ -52,7 +52,7 @@ const updateNews = async (req, res) => {
     if (!newUpdate) {
       return res.status(404).json(errors._404);
     }
-    res.status(200).json(UPDATED_DONE);
+    res.status(200).json({ meta: { msg: UPDATED_DONE } });
   } catch (e) {
     res.status(500).send(errors._500);
   }
@@ -65,7 +65,7 @@ const DeleteNews = async (req, res) => {
     if (!newdelete) {
       return res.status(404).json(errors._404);
     }
-    res.status(200).json(DELETED_DONE);
+    res.status(200).json({ meta: { msg: DELETED_DONE } });
   } catch (e) {
     res.status(500).send(errors._500);
   }

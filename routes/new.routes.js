@@ -1,15 +1,15 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const {
   updateNews,
   CreateNews,
   getNewsById,
   DeleteNews,
   getAllNews,
-} = require('../controllers/new');
+} = require("../controllers/new.contoller");
 
 const router = Router();
-const { isAuthenticated } = require('../middlewares/isAuthenticated');
-const { isAdmin } = require('../middlewares/isAdmin');
+const { isAuthenticated } = require("../middlewares/isAuthenticated");
+const { isAdmin } = require("../middlewares/isAdmin");
 /**
  * @swagger
  * components:
@@ -50,11 +50,11 @@ const { isAdmin } = require('../middlewares/isAdmin');
  * */
 
 /**
-  * @swagger
-  * tags:
-  *   name: News
-  *   description: The News managing API
-  */
+ * @swagger
+ * tags:
+ *   name: News
+ *   description: The News managing API
+ */
 
 /**
  * @swagger
@@ -129,7 +129,7 @@ router.get("/:id", getNewsById);
  *      500:
  *        description: Some error happened
  *      403:
- *        description: No authorization token was found. 
+ *        description: No authorization token was found.
  */
 
 router.put("/:id", [isAuthenticated, isAdmin], updateNews);
@@ -155,7 +155,7 @@ router.put("/:id", [isAuthenticated, isAdmin], updateNews);
  *       500:
  *         description: Some server error
  *       403:
- *         description: No authorization token was found. 
+ *         description: No authorization token was found.
  */
 router.post("/", [isAuthenticated, isAdmin], CreateNews);
 /**
@@ -171,7 +171,7 @@ router.post("/", [isAuthenticated, isAdmin], CreateNews);
  *           type: string
  *         required: true
  *         description: The New id
- * 
+ *
  *     responses:
  *       200:
  *         description: The New was deleted
