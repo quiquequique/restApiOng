@@ -5,11 +5,15 @@ const multer = require('multer');
 const { uploadImagen } = require('../controllers/images.controller');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
+const { isImage } = require('../middlewares/isImage');
 
 const upload = multer();
 
 router.post(
-  '/upload', /* verify if admin (middleware) */ [isAuthenticated, isAdmin], upload.single('file'),
+  '/upload',
+  [isAuthenticated, isAdmin],
+  upload.single('file'),
+  [isImage],
   uploadImagen
 );
 
