@@ -130,6 +130,6 @@ router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
  *         description: The Testimony was not found
  */
 router.delete("/:id", [isAuthenticated, isAdmin], deleteTestimony);
-router.get("/", getAllTestimonies);
+router.get("/", [isAuthenticated, isAdmin], getAllTestimonies);
 
 module.exports = router;
