@@ -66,7 +66,7 @@ describe("News Routes", () => {
         .send(newsedit)
         .end((err, res) => {
           res.should.have.status(200);
-          res.text.should.be.eq("Successful update");
+          res.body.meta.msg.should.be.eq("Successful update");
           done();
         });
     });
@@ -75,11 +75,11 @@ describe("News Routes", () => {
     it("It should delete a news by id", (done) => {
       chai
         .request(server)
-        .put("/news/1")
+        .delete("/news/1")
         .set({ Authorization: token })
         .end((err, res) => {
           res.should.have.status(200);
-          res.text.should.be.eq("Successfully removed");
+          res.body.meta.msg.should.be.eq("Successfully removed");
           done();
         });
     });

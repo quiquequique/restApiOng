@@ -8,4 +8,12 @@ const newsedit = {
   content: "Carlaedit",
   image: "marla12345edit@gmail.com",
 };
-module.exports = { news, newsedit };
+const testimony = {
+  name: "Carlos",
+  content: "Carla",
+};
+const testimonyedit = {
+  name: "Carlosedit",
+  content: "Carlaedit",
+};
+module.exports = { news, newsedit, testimony, testimonyedit };
