@@ -1,4 +1,5 @@
 const { Testimony } = require("../models");
+const { paginado } = require("../utils/pagination");
 
 const create_testimony = async (body) => {
   const name = typeof body.name !== "undefined";
@@ -39,9 +40,15 @@ const delete_testimony = async (id) => {
   }
   return false;
 };
+const get_all_testimonies = async (page) => {
+  const testimonies = await Testimony.findAll();
+  const resp = paginado(page, testimonies);
+  return resp;
+};
 module.exports = {
   create_testimony,
   check_exist_testimony,
   update_testimony,
   delete_testimony,
+  get_all_testimonies,
 };
