@@ -6,6 +6,7 @@ const {
   createTestimony,
   updateTestimony,
   deleteTestimony,
+  getAllTestimonies,
 } = require("../controllers/testimony.controller");
 
 const { isAuthenticated } = require("../middlewares/isAuthenticated");
@@ -41,11 +42,11 @@ const { isAdmin } = require("../middlewares/isAdmin");
  * */
 
 /**
-  * @swagger
-  * tags:
-  *   name: Testimony
-  *   description: The Testimony managing API
-  */
+ * @swagger
+ * tags:
+ *   name: Testimony
+ *   description: The Testimony managing API
+ */
 /**
  * @swagger
  * /testimonials:
@@ -68,7 +69,7 @@ const { isAdmin } = require("../middlewares/isAdmin");
  *       500:
  *         description: Some server error
  *       403:
- *         description: No authorization token was found. 
+ *         description: No authorization token was found.
  */
 router.post("/", [isAuthenticated, isAdmin], createTestimony);
 /**
@@ -102,7 +103,7 @@ router.post("/", [isAuthenticated, isAdmin], createTestimony);
  *      500:
  *        description: Some error happened
  *      403:
- *        description: No authorization token was found. 
+ *        description: No authorization token was found.
  */
 
 router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
@@ -119,7 +120,7 @@ router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
  *           type: string
  *         required: true
  *         description: The Testimony id
- * 
+ *
  *     responses:
  *       200:
  *         description: The Testimony was deleted
@@ -129,5 +130,6 @@ router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
  *         description: The Testimony was not found
  */
 router.delete("/:id", [isAuthenticated, isAdmin], deleteTestimony);
+router.get("/", getAllTestimonies);
 
 module.exports = router;
