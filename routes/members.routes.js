@@ -5,7 +5,7 @@ const {
 	updateMemberByID,
 	getAllMembers,
 	deleteMemberById,
-} = require('../controllers/members.contoller');
+} = require('../controllers/members.controller');
 const { addMemberValidator } = require('../middlewares/members.validator');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
@@ -49,11 +49,11 @@ const { isAdmin } = require('../middlewares/isAdmin');
  *        description: "new member"
  * */
 /**
-  * @swagger
-  * tags:
-  *   name: Members
-  *   description: The Members managing API
-  */
+ * @swagger
+ * tags:
+ *   name: Members
+ *   description: The Members managing API
+ */
 /**
  * @swagger
  * /members:
@@ -93,7 +93,7 @@ router.get('/', getAllMembers);
  *       500:
  *         description: Some server error
  *       403:
- *         description: No authorization token was found. 
+ *         description: No authorization token was found.
  */
 router.post('/', [isAuthenticated, isAdmin, addMemberValidator], createMember);
 /**
@@ -127,7 +127,7 @@ router.post('/', [isAuthenticated, isAdmin, addMemberValidator], createMember);
  *      500:
  *        description: Some error happened
  *      403:
- *        description: No authorization token was found. 
+ *        description: No authorization token was found.
  */
 router.put('/:id', [isAuthenticated, isAdmin], updateMemberByID);
 /**
@@ -143,7 +143,7 @@ router.put('/:id', [isAuthenticated, isAdmin], updateMemberByID);
  *           type: string
  *         required: true
  *         description: The Member id
- * 
+ *
  *     responses:
  *       200:
  *         description: The Member was deleted

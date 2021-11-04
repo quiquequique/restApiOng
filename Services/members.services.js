@@ -1,9 +1,11 @@
 const dayjs = require('dayjs');
 const { Member } = require('../models');
+const { paginado } = require('../utils/pagination');
 
-const getMembers = async () => {
+const getMembers = async (page) => {
 	try {
-		return await Member.findAll();
+		const members = await Member.findAll();
+		return paginado(page, members);
 	} catch (error) {
 		throw error;
 	}
