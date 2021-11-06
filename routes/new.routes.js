@@ -5,11 +5,11 @@ const {
   getNewsById,
   DeleteNews,
   getAllNews,
-} = require("../controllers/new.contoller");
+} = require("../controllers/new.controller");
 
 const router = Router();
-const { isAuthenticated } = require('../middlewares/isAuthenticated');
-const { isAdmin } = require('../middlewares/isAdmin');
+const { isAuthenticated } = require("../middlewares/isAuthenticated");
+const { isAdmin } = require("../middlewares/isAdmin");
 router.get("/", getAllNews);
 router.get("/:id", getNewsById);
 router.put("/:id", [isAuthenticated, isAdmin], updateNews);

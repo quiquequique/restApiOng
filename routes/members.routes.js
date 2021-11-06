@@ -5,7 +5,7 @@ const {
 	updateMemberByID,
 	getAllMembers,
 	deleteMemberById,
-} = require('../controllers/members.contoller');
+} = require('../controllers/members.controller');
 const { addMemberValidator } = require('../middlewares/members.validator');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
@@ -56,11 +56,11 @@ module.exports = router;
  *        description: "new member"
  * */
 /**
-  * @swagger
-  * tags:
-  *   name: Members
-  *   description: The Members managing API
-  */
+ * @swagger
+ * tags:
+ *   name: Members
+ *   description: The Members managing API
+ */
 /**
  * @swagger
  * /members:
@@ -99,7 +99,7 @@ module.exports = router;
  *       500:
  *         description: Some server error
  *       403:
- *         description: No authorization token was found. 
+ *         description: No authorization token was found.
  */
 /**
  * @swagger
@@ -132,7 +132,7 @@ module.exports = router;
  *      500:
  *        description: Some error happened
  *      403:
- *        description: No authorization token was found. 
+ *        description: No authorization token was found.
  */
 /**
  * @swagger
@@ -147,7 +147,7 @@ module.exports = router;
  *           type: string
  *         required: true
  *         description: The Member id
- * 
+ *
  *     responses:
  *       200:
  *         description: The Member was deleted
