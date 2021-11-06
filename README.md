@@ -25,4 +25,6 @@ npx sequelize-cli db:seed:all
 
 ``` bash
 npm start
+or 
+npm run dev  
 ```
