@@ -12,6 +12,14 @@ const {
   categoryUpdate,
   deleteCategory
 } = require('../controllers/categories.controller');
+router.get('/', getAllCategories);
+router.get('/:id', getCategoryById);
+router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
+router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
+router.patch('/:id', categoryValidator, [isAuthenticated, isAdmin], categoryUpdate);
+
+
+module.exports = router;
 /**
  * @swagger
  * components:
@@ -64,8 +72,6 @@ const {
  *                 $ref: '#/components/schemas/Categories'
  */
 
-router.get('/', getAllCategories);
-
 /**
  * @swagger
  * /categories/{id}:
@@ -89,9 +95,6 @@ router.get('/', getAllCategories);
  *       404:
  *         description: The categorie was not found
  */
-
-router.get('/:id', getCategoryById);
-
 /**
  * @swagger
  * /categories:
@@ -116,8 +119,6 @@ router.get('/:id', getCategoryById);
  *       500:
  *         description: Server error
  */
-router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
-
 /**
  * @swagger
  * /categories/{id}:
@@ -141,7 +142,6 @@ router.post('/', categoryValidator, [isAuthenticated, isAdmin], newCategory);
  *        description: No authorization token was found.
  * 
  */
-router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
 /**
  * @swagger
  * /categories/{id}:
@@ -165,7 +165,3 @@ router.delete('/:id', [isAuthenticated, isAdmin], deleteCategory);
  *        description: No authorization token was found.
  * 
  */
-router.patch('/:id', categoryValidator, [isAuthenticated, isAdmin], categoryUpdate);
-
-
-module.exports = router;

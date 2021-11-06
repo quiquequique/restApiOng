@@ -9,6 +9,13 @@ const {
 const { addMemberValidator } = require('../middlewares/members.validator');
 const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { isAdmin } = require('../middlewares/isAdmin');
+router.get('/', getAllMembers);
+router.post('/', [isAuthenticated, isAdmin, addMemberValidator], createMember);
+router.put('/:id', [isAuthenticated, isAdmin], updateMemberByID);
+router.delete('/:id', [isAuthenticated, isAdmin], deleteMemberById);
+
+module.exports = router;
+
 /**
  * @swagger
  * components:
@@ -70,7 +77,6 @@ const { isAdmin } = require('../middlewares/isAdmin');
  *               items:
  *                 $ref: '#/components/schemas/Members'
  */
-router.get('/', getAllMembers);
 /**
  * @swagger
  * /members:
@@ -95,7 +101,6 @@ router.get('/', getAllMembers);
  *       403:
  *         description: No authorization token was found. 
  */
-router.post('/', [isAuthenticated, isAdmin, addMemberValidator], createMember);
 /**
  * @swagger
  * /members/{id}:
@@ -129,7 +134,6 @@ router.post('/', [isAuthenticated, isAdmin, addMemberValidator], createMember);
  *      403:
  *        description: No authorization token was found. 
  */
-router.put('/:id', [isAuthenticated, isAdmin], updateMemberByID);
 /**
  * @swagger
  * /members/{id}:
@@ -152,7 +156,3 @@ router.put('/:id', [isAuthenticated, isAdmin], updateMemberByID);
  *       404:
  *         description: The Member was not found
  */
-
-router.delete('/:id', [isAuthenticated, isAdmin], deleteMemberById);
-
-module.exports = router;

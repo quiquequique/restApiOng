@@ -11,6 +11,11 @@ const {
 
 const { isAuthenticated } = require("../middlewares/isAuthenticated");
 const { isAdmin } = require("../middlewares/isAdmin");
+router.post("/", [isAuthenticated, isAdmin], createTestimony);
+router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
+router.delete("/:id", [isAuthenticated, isAdmin], deleteTestimony);
+
+module.exports = router;
 /**
  * @swagger
  * components:
@@ -71,7 +76,6 @@ const { isAdmin } = require("../middlewares/isAdmin");
  *       403:
  *         description: No authorization token was found.
  */
-router.post("/", [isAuthenticated, isAdmin], createTestimony);
 /**
  * @swagger
  * /testimonials/{id}:
@@ -106,7 +110,6 @@ router.post("/", [isAuthenticated, isAdmin], createTestimony);
  *        description: No authorization token was found.
  */
 
-router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
 /**
  * @swagger
  * /testimonials/{id}:
@@ -129,7 +132,3 @@ router.put("/:id", [isAuthenticated, isAdmin], updateTestimony);
  *       404:
  *         description: The Testimony was not found
  */
-router.delete("/:id", [isAuthenticated, isAdmin], deleteTestimony);
-router.get("/", [isAuthenticated, isAdmin], getAllTestimonies);
-
-module.exports = router;
