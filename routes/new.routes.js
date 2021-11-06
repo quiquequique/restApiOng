@@ -5,11 +5,19 @@ const {
   getNewsById,
   DeleteNews,
   getAllNews,
-} = require("../controllers/new.contoller");
+} = require("../controllers/new.controller");
 
 const router = Router();
 const { isAuthenticated } = require("../middlewares/isAuthenticated");
 const { isAdmin } = require("../middlewares/isAdmin");
+router.get("/", getAllNews);
+router.get("/:id", getNewsById);
+router.put("/:id", [isAuthenticated, isAdmin], updateNews);
+router.post("/", [isAuthenticated, isAdmin], CreateNews);
+router.delete("/:id", [isAuthenticated, isAdmin], DeleteNews);
+
+module.exports = router;
+
 /**
  * @swagger
  * components:
@@ -72,7 +80,6 @@ const { isAdmin } = require("../middlewares/isAdmin");
  *               items:
  *                 $ref: '#/components/schemas/News'
  */
-router.get("/", getAllNews);
 
 /**
  * @swagger
@@ -97,7 +104,6 @@ router.get("/", getAllNews);
  *       404:
  *         description: The New was not found
  */
-router.get("/:id", getNewsById);
 /**
  * @swagger
  * /news/{id}:
@@ -132,7 +138,6 @@ router.get("/:id", getNewsById);
  *        description: No authorization token was found.
  */
 
-router.put("/:id", [isAuthenticated, isAdmin], updateNews);
 /**
  * @swagger
  * /news:
@@ -157,7 +162,6 @@ router.put("/:id", [isAuthenticated, isAdmin], updateNews);
  *       403:
  *         description: No authorization token was found.
  */
-router.post("/", [isAuthenticated, isAdmin], CreateNews);
 /**
  * @swagger
  * /news/{id}:
@@ -180,7 +184,3 @@ router.post("/", [isAuthenticated, isAdmin], CreateNews);
  *       404:
  *         description: The New was not found
  */
-
-router.delete("/:id", [isAuthenticated, isAdmin], DeleteNews);
-
-module.exports = router;

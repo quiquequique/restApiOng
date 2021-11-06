@@ -15,8 +15,9 @@ const {
 
 //get all members
 const getAllMembers = async (req, res) => {
+	const { page } = req.query || 1;
 	try {
-		const members = await getMembers();
+		const members = await getMembers(page);
 		return res.status(200).json({ members });
 	} catch (err) {
 		res.status(500).json({ ok: false, msg: err.message });
